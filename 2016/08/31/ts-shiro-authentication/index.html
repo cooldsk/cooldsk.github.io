@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="shiro," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="当然，所有这些技术，网上都有很多详细的教程，五花八门，中英文，可能需要自己筛选，在此我仅作为一个初学者，分享一下学习重点和收获。
+首先，shiro是什么？　　　　　　Apache Shiro（发音为“shee-roh”，日语“堡垒（Castle）”的意思）是一个强大易用的Java安全框架，提供了认证、授权、加密和会话管理功能，可为任何应用提供安全保障 - 从命令行应用、移动应用到大型网络及企">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro——登录，岂止用户名和密码">
+<meta property="og:url" content="http://yoursite.com/2016/08/31/ts-shiro-authentication/index.html">
+<meta property="og:site_name" content="cooldsk's Blogs">
+<meta property="og:description" content="当然，所有这些技术，网上都有很多详细的教程，五花八门，中英文，可能需要自己筛选，在此我仅作为一个初学者，分享一下学习重点和收获。
+首先，shiro是什么？　　　　　　Apache Shiro（发音为“shee-roh”，日语“堡垒（Castle）”的意思）是一个强大易用的Java安全框架，提供了认证、授权、加密和会话管理功能，可为任何应用提供安全保障 - 从命令行应用、移动应用到大型网络及企">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-1-intro.png">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-2-content.png">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-3-architecture.png">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-4-process.png">
+<meta property="og:updated_time" content="2016-09-04T15:05:10.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shiro——登录，岂止用户名和密码">
+<meta name="twitter:description" content="当然，所有这些技术，网上都有很多详细的教程，五花八门，中英文，可能需要自己筛选，在此我仅作为一个初学者，分享一下学习重点和收获。
+首先，shiro是什么？　　　　　　Apache Shiro（发音为“shee-roh”，日语“堡垒（Castle）”的意思）是一个强大易用的Java安全框架，提供了认证、授权、加密和会话管理功能，可为任何应用提供安全保障 - 从命令行应用、移动应用到大型网络及企">
+<meta name="twitter:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-1-intro.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/31/ts-shiro-authentication/"/>
+
+  <title> Shiro——登录，岂止用户名和密码 | cooldsk's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">cooldsk's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Shiro——登录，岂止用户名和密码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T23:30:17+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/ts-shiro-authentication/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/ts-shiro-authentication/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/31/ts-shiro-authentication/" class="leancloud_visitors" data-flag-title="Shiro——登录，岂止用户名和密码">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>　　当然，所有这些技术，网上都有很多详细的教程，五花八门，中英文，可能需要自己筛选，在此我仅作为一个初学者，分享一下学习重点和收获。</p>
+<h4 id="首先，shiro是什么？"><a href="#首先，shiro是什么？" class="headerlink" title="首先，shiro是什么？"></a>首先，shiro是什么？</h4><p>　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-1-intro.png" alt="intro"><br>　　Apache Shiro（发音为“shee-roh”，日语“堡垒（Castle）”的意思）是一个强大易用的Java安全框架，提供了认证、授权、加密和会话管理功能，可为任何应用提供安全保障 - 从命令行应用、移动应用到大型网络及企业应用。</p>
+</blockquote>
+<h4 id="其次，shiro能做什么？"><a href="#其次，shiro能做什么？" class="headerlink" title="其次，shiro能做什么？"></a>其次，shiro能做什么？</h4><blockquote>
+<p>　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-2-content.png" alt="content"><br>　　Shiro为解决下列问题（它们常被称为应用安全的四要素）提供了保护应用的API：<br>　　•    认证 - 用户身份识别，常被称为用户“登录”；<br>　　•    授权 - 访问控制；<br>　　•    密码加密 - 保护或隐藏数据防止被偷窥；<br>　　•    会话管理 - 每用户相关的时间敏感的状态。<br>　　•    Shiro还支持一些辅助特性，如Web应用安全、单元测试和多线程，它们的存在强化了上面提到的四个要素。<br>　　shiro的优势就不赘述了，这种东西不太好说，什么易用性、广泛性、可插拨之类的。</p>
+</blockquote>
+<h4 id="我们从外部来看，Shiro如何完成工作？"><a href="#我们从外部来看，Shiro如何完成工作？" class="headerlink" title="我们从外部来看，Shiro如何完成工作？"></a>我们从外部来看，Shiro如何完成工作？</h4><blockquote>
+<p>　　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-3-architecture.png" alt="architecture"><br>　　　　　　　核心概念：Subject，SecurityManager和Realms<br><strong>Subject</strong><br>　　在考虑应用安全时，你最常问的问题可能是“当前用户是谁？”或“当前用户允许做X吗？”。当我们写代码或设计用户界面时，问自己这些问题很平常：应用通常都是基于用户故事构建的，并且你希望功能描述（和安全）是基于每个用户的。所以，对于我们而言，考虑应用安全的最自然方式就是基于当前用户。Shiro的API用它的Subject概念从根本上体现了这种思考方式。<br>Subject一词是一个安全术语，其基本意思是“当前的操作用户”。称之为“用户”并不准确，因为“用户”一词通常跟人相关。在安全领域，术语“Subject”可以是人，也可以是第三方进程、后台帐户（Daemon Account）或其他类似事物。它仅仅意味着“当前跟软件交互的东西”。但考虑到大多数目的和用途，你可以把它认为是Shiro的“用户”概念。在代码的任何地方，你都能轻易的获得Shiro Subject，参见如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import org.apache.shiro.subject.Subject;</div><div class="line">import org.apache.shiro.SecurityUtils;</div><div class="line">...</div><div class="line">Subject currentUser = SecurityUtils.getSubject();</div></pre></td></tr></table></figure></p>
+<p>　　一旦获得Subject，你就可以立即获得你希望用Shiro为当前用户做的90%的事情，如登录、登出、访问会话、执行授权检查等 - 稍后还会看到更多。这里的关键点是Shiro的API非常直观，因为它反映了开发者以‘每个用户’思考安全控制的自然趋势。同时，在代码的任何地方都能很轻松地访问Subject，允许在任何需要的地方进行安全操作。<br><strong>SecurityManager</strong><br>　　Subject的“幕后”推手是SecurityManager。Subject代表了当前用户的安全操作，SecurityManager则管理所有用户的安全操作。它是Shiro框架的核心，充当“保护伞”，引用了多个内部嵌套安全组件，它们形成了对象图。但是，一旦SecurityManager及其内部对象图配置好，它就会退居幕后，应用开发人员几乎把他们的所有时间都花在Subject API调用上。<br>那么，如何设置SecurityManager呢？嗯，这要看应用的环境。例如，Web应用通常会在Web.xml中指定一个Shiro Servlet Filter，这会创建SecurityManager实例，如果你运行的是一个独立应用，你需要用其他配置方式，但有很多配置选项。<br>　　一个应用几乎总是只有一个SecurityManager实例。它实际是应用的Singleton（尽管不必是一个静态Singleton）。跟Shiro里的几乎所有组件一样，SecurityManager的缺省实现是POJO，而且可用POJO兼容的任何配置机制进行配置 - 普通的Java代码、Spring XML、YAML、.properties和.ini文件等。基本来讲，能够实例化类和调用JavaBean兼容方法的任何配置形式都可使用。<br>为此，Shiro借助基于文本的INI配置提供了一个缺省的“公共”解决方案。INI易于阅读、使用简单并且需要极少依赖。你还能看到，只要简单地理解对象导航，INI可被有效地用于配置像SecurityManager那样简单的对象图。<br>Realms<br>　　Shiro的第三个也是最后一个概念是Realm。Realm充当了Shiro与应用安全数据间的“桥梁”或者“连接器”。也就是说，当切实与像用户帐户这类安全相关数据进行交互，执行认证（登录）和授权（访问控制）时，Shiro会从应用配置的Realm中查找很多内容。<br>从这个意义上讲，Realm实质上是一个安全相关的DAO：它封装了数据源的连接细节，并在需要时将相关数据提供给Shiro。当配置Shiro时，你必须至少指定一个Realm，用于认证和（或）授权。配置多个Realm是可以的，但是至少需要一个。<br>　　Shiro内置了可以连接大量安全数据源（又名目录）的Realm，如LDAP、关系数据库（JDBC）、类似INI的文本配置资源以及属性文件等。如果缺省的Realm不能满足需求，你还可以插入代表自定义数据源的自己的Realm实现。</p>
+</blockquote>
+<h4 id="从-Shiro-内部来看下-Shiro-的架构"><a href="#从-Shiro-内部来看下-Shiro-的架构" class="headerlink" title="从 Shiro 内部来看下 Shiro 的架构"></a>从 Shiro 内部来看下 Shiro 的架构</h4><blockquote>
+<p>　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-4-process.png" alt="process"><br>　　Subject：主体，可以看到主体可以是任何可以与应用交互的 “用户”；<br>　　SecurityManager：相当于 SpringMVC 中的 DispatcherServlet 或者 Struts2 中的 FilterDispatcher；是 Shiro 的心脏；所有具体的交互都通过<br>SecurityManager 进行控制；它管理着所有Subject、且负责进行认证和授权、及会话、缓存的管理。<br>　　Authenticator：认证器，负责主体认证的，这是一个扩展点，如果用户觉得 Shiro 默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；<br>　　Authrizer：授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能；<br>　　Realm：可以有 1 个或多个 Realm，可以认为是安全实体数据源，即用于获取安全实体的；可以是 JDBC 实现，也可以是 LDAP 实现，或者内存实现等等；由用户提供；注意：Shiro 不知道你的用户 / 权限存储在哪及以何种格式存储；所以我们一般在应用中都需要实现自己的 Realm；<br>　　SessionManager：如果写过 Servlet 就应该知道 Session 的概念，Session 呢需要有人去管理它的生命周期，这个组件就是 SessionManager；而 Shiro 并不仅仅可以用在 Web 环境，也可以用在如普通的 JavaSE 环境、EJB 等环境；所有呢，Shiro 就抽象了一个自己的 Session 来管理主体与应用之间交互的数据；这样的话，比如我们在 Web 环境用，刚开始是一台 Web 服务器；接着又上了台 EJB 服务器；这时想把两台服务器的会话数据放到一个地方，这个时候就可以实现自己的分布式会话（如把数据放到 Memcached 服务器）；<br>　　SessionDAO：DAO 大家都用过，数据访问对象，用于会话的 CRUD，比如我们想把 Session 保存到数据库，那么可以实现自己的 SessionDAO，通过如 JDBC 写到数据库；比如想把 Session 放到 Memcached 中，可以实现自己的 Memcached SessionDAO；另外 SessionDAO 中可以使用 Cache 进行缓存，以提高性能；<br>　　CacheManager：缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能<br>　　Cryptography：密码模块，Shiro 提高了一些常见的加密组件用于如密码加密 / 解密的。<br>接触shiro，了解以上内容是必要的。</p>
+</blockquote>
+<p>####实践收获</p>
+<blockquote>
+<p>　　与spring的集成，配置web.xml和application.xml文件在application.xml中注入filter bean，并可在web.xml中与之对应,Web.xml中:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">   &lt;!-- filter-name和在application.xml内注入的&apos;shiroFilter&apos; bean name匹配--&gt;</div><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;targetFilterLifecycle&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;!-- Make sure any request you want accessible to Shiro is filtered. /* catches all requests.</div><div class="line">确保任何你想其使用shiro的，都被过滤到--&gt;</div><div class="line">&lt;!-- Usually this filter mapping is defined first (before all others) to 通常这个过滤器映射被定义在xml文件首位，在所有其他过滤器之前--&gt;</div><div class="line">&lt;!-- ensure that Shiro works in subsequent filters in the filter chain:             </div><div class="line">      在过滤器链内确保shiro能够正常运行在后续的过滤器中。</div><div class="line">--&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div><div class="line"></div><div class="line">&lt;!-- 在applicationContext.xml中（或者新建一个xxx-shiro.xml文件，并将其引入）定义web可用的SecurityManager和与web.xml对应的shiroFilter --&gt;</div><div class="line">&lt;!-- 安全认证过滤器 --&gt;</div><div class="line">&lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&gt;</div><div class="line">   &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot; /&gt;</div><div class="line"></div><div class="line">&lt;!—定义登录的url,未登录请求指定路径将跳转至此页面--&gt;</div><div class="line">   &lt;property name=&quot;loginUrl&quot; value=&quot;/login&quot; /&gt; </div><div class="line"></div><div class="line">&lt;!-- 登录成功的后重定向的路径 --&gt;</div><div class="line">   &lt;property name=&quot;successUrl&quot; value=&quot;/index&quot; /&gt;</div><div class="line"></div><div class="line">&lt;!—过滤器属性，定义过滤器 非必须--&gt;</div><div class="line">   &lt;property name=&quot;filters&quot;&gt;</div><div class="line">           &lt;map&gt;</div><div class="line">&lt;!—定义cas认证 --&gt;</div><div class="line">               &lt;entry key=&quot;cas&quot; value-ref=&quot;casFilter&quot;/&gt;</div><div class="line">&lt;!—处理提交的表单 formAuthenticationFilter可以是自定义的bean，继承自FormAuthenticationFilter --&gt;</div><div class="line">               &lt;entry key=&quot;authc&quot; value-ref=&quot;formAuthenticationFilter&quot;/&gt;  </div><div class="line">           &lt;/map&gt;</div><div class="line">       &lt;/property&gt;</div><div class="line">   &lt;property name=&quot;filterChainDefinitions&quot;&gt;</div><div class="line">      &lt;ref bean=&quot;shiroFilterChainDefinitions&quot;/&gt;</div><div class="line">   &lt;/property&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!-- Shiro权限过滤器定义 --&gt;</div><div class="line">&lt;bean name=&quot;shiroFilterChainDefinitions&quot; class=&quot;java.lang.String&quot;&gt;</div><div class="line">   &lt;constructor-arg&gt;</div><div class="line">      &lt;value&gt;</div><div class="line">         /assets/** = anon</div><div class="line">         /login = authc</div><div class="line">         /logout = anon</div><div class="line">&lt;!--所有请求将首先由UserFilter处理 若当前用户已被认证，则通过此过滤器，否则重新向到loginUrl--&gt;         </div><div class="line">/** = user</div><div class="line">      &lt;/value&gt;</div><div class="line">   &lt;/constructor-arg&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!-- 定义Shiro安全管理配置 --&gt;</div><div class="line">&lt;bean id=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;</div><div class="line">    &lt;!-- Single realm app.  If you have multiple realms, use the &apos;realms&apos; property instead. --&gt;</div><div class="line">&lt;property name=&quot;realm&quot; ref=&quot;myRealm&quot;/&gt;</div><div class="line">&lt;property name=&quot;sessionManager&quot; ref=&quot;sessionManager&quot; /&gt;</div><div class="line">&lt;property name=&quot;cacheManager&quot; ref=&quot;shiroCacheManager&quot; /&gt;</div><div class="line"></div><div class="line">&lt;!-- security datasource --&gt;</div><div class="line">&lt;!--相当重要了，使用shiro需要编写的代码就在这里了,自定义realm完成对service层的调用，以获取数据库中存储的用户信息与提交用户名和密码比较，完成认证(很多中间过程的调用shiro自会帮我们完成),而且我们只需要 显示调用subject对象即可。自定义realm，主要实现两个方法,1. doGetAuthenticationInfo 2. doGetAuthorizationInfo 见文档结尾自定义shiro示例--&gt;</div><div class="line">&lt;bean id=&quot;myRealm&quot; class=&quot;...&quot;&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;!-- 定义授权缓存管理器 --&gt;</div><div class="line">&lt;!--   &lt;bean id=&quot;shiroCacheManager&quot; class=&quot;com.gukeer.common.security.shiro.cache.SessionCacheManager&quot; fffafsadffasdfs/&gt; --&gt;</div><div class="line">   &lt;bean id=&quot;shiroCacheManager&quot; class=&quot;org.apache.shiro.cache.ehcache.EhCacheManager&quot;&gt;</div><div class="line">      &lt;property name=&quot;cacheManagerConfigFile&quot; value=&quot;classpath:system-ehcache.xml&quot;&gt;&lt;/property&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">&lt;!-- 保证实现了Shiro内部lifecycle函数的bean执行 --&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;bean id=&quot;lifecycleBeanPostProcessor&quot; class=&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;/&gt;</div><div class="line">&lt;!-- Define the Shiro Realm implementation you want to use to connect to your back-end --&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="文末，说几句客套话"><a href="#文末，说几句客套话" class="headerlink" title="文末，说几句客套话"></a>文末，说几句客套话</h4><blockquote>
+<p>　　此处暂总结了使用shiro完成登录，当然shiro还有很重要的授权、session管理、加密功能。文章太长，以后再说吧。我都看不下去了。 </p>
+</blockquote>
+<p>realm自定义例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 系统安全认证实现类</div><div class="line"> * @author cooldsk</div><div class="line"> * @version 2016-8-20</div><div class="line"> */</div><div class="line">@Service</div><div class="line">//@DependsOn(&#123;&quot;userDao&quot;,&quot;roleDao&quot;,&quot;menuDao&quot;&#125;)</div><div class="line">public class SystemAuthorizingRealm extends AuthorizingRealm &#123;</div><div class="line">   private Logger logger = LoggerFactory.getLogger(getClass());</div><div class="line">   private SystemService systemService;</div><div class="line">   @Autowired</div><div class="line">    HttpServletRequest request;</div><div class="line">   /**</div><div class="line">    * 认证回调函数, 登录时调用</div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) &#123;</div><div class="line">      UsernamePasswordToken token = (UsernamePasswordToken) authcToken;</div><div class="line">      int activeSessionSize = getSystemService().getSessionDao().getActiveSessions(false).size();</div><div class="line">      if (logger.isDebugEnabled())&#123;</div><div class="line">         logger.debug(&quot;login submit, active session size: &#123;&#125;, username: &#123;&#125;&quot;, activeSessionSize, token.getUsername());</div><div class="line">      &#125;</div><div class="line">      boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);</div><div class="line">      // 校验登录验证码</div><div class="line">      if (!mobile &amp;&amp; LoginController.isValidateCodeLogin(token.getUsername(), false, false))&#123;</div><div class="line">         Session session = UserUtils.getSession();</div><div class="line">         String code = (String)session.getAttribute(ValidateCodeServlet.VALIDATE_CODE);</div><div class="line">         if (token.getCaptcha() == null || !token.getCaptcha().toUpperCase().equals(code))&#123;</div><div class="line">            throw new AuthenticationException(&quot;msg:验证码错误, 请重试.&quot;);</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      // 校验用户名密码</div><div class="line">      User user = getSystemService().getUserByLoginName(token.getUsername());</div><div class="line">      if (user != null) &#123;</div><div class="line">         if (Global.NO.equals(user.getLoginFlag()))&#123;</div><div class="line">            throw new AuthenticationException(&quot;msg:该帐号已禁止登录.&quot;);</div><div class="line">         &#125;</div><div class="line">         byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));</div><div class="line">         return new SimpleAuthenticationInfo(new Principal(user, token.isMobileLogin()),</div><div class="line">               user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());</div><div class="line">      &#125; else &#123;</div><div class="line">         return null;</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   /**</div><div class="line">    * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用</div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;</div><div class="line">      Principal principal = (Principal) getAvailablePrincipal(principals);</div><div class="line">      // 获取当前已登录的用户</div><div class="line">      if (!Global.TRUE.equals(Global.getConfig(&quot;user.multiAccountLogin&quot;)))&#123;</div><div class="line">         Collection&lt;Session&gt; sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());</div><div class="line">         if (sessions.size() &gt; 0)&#123;</div><div class="line">            // 如果是登录进来的，则踢出已在线用户</div><div class="line">            if (UserUtils.getSubject().isAuthenticated())&#123;</div><div class="line">               for (Session session : sessions)&#123;</div><div class="line">                  getSystemService().getSessionDao().delete(session);</div><div class="line">               &#125;</div><div class="line">            &#125;</div><div class="line">            // 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。</div><div class="line">            else&#123;</div><div class="line">               UserUtils.getSubject().logout();</div><div class="line">               throw new AuthenticationException(&quot;msg:账号已在其它地方登录，请重新登录。&quot;);</div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      User user = getSystemService().getUserByLoginName(principal.getLoginName());</div><div class="line">      if (user != null) &#123;</div><div class="line">         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</div><div class="line">         List&lt;Menu&gt; list = UserUtils.getMenuList();</div><div class="line">         for (Menu menu : list)&#123;</div><div class="line">            if (StringUtils.isNotBlank(menu.getPermission()))&#123;</div><div class="line">               // 添加基于Permission的权限信息</div><div class="line">               for (String permission : StringUtils.split(menu.getPermission(),&quot;,&quot;))&#123;</div><div class="line">                  info.addStringPermission(permission);</div><div class="line">               &#125;</div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line">         // 添加用户权限</div><div class="line">         info.addStringPermission(&quot;user&quot;);</div><div class="line">         // 添加用户角色信息</div><div class="line">         for (Role role : user.getRoleList())&#123;</div><div class="line">            info.addRole(role.getEnname());</div><div class="line">         &#125;</div><div class="line">         // 更新登录IP和时间</div><div class="line">         getSystemService().updateUserLoginInfo(user);</div><div class="line">         // 记录登录日志</div><div class="line">         LogUtils.saveLog(Servlets.getRequest(), &quot;系统登录&quot;);</div><div class="line">         return info;</div><div class="line">      &#125; else &#123;</div><div class="line">         return null;</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   @Override</div><div class="line">   protected void checkPermission(Permission permission, AuthorizationInfo info) &#123;</div><div class="line">      authorizationValidate(permission);</div><div class="line">      super.checkPermission(permission, info);</div><div class="line">   &#125;</div><div class="line">   @Override</div><div class="line">   protected boolean[] isPermitted(List&lt;Permission&gt; permissions, AuthorizationInfo info) &#123;</div><div class="line">      if (permissions != null &amp;&amp; !permissions.isEmpty()) &#123;</div><div class="line">            for (Permission permission : permissions) &#123;</div><div class="line">              authorizationValidate(permission);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">      return super.isPermitted(permissions, info);</div><div class="line">   &#125;</div><div class="line">   @Override</div><div class="line">   public boolean isPermitted(PrincipalCollection principals, Permission permission) &#123;</div><div class="line">      authorizationValidate(permission);</div><div class="line">      return super.isPermitted(principals, permission);</div><div class="line">   &#125;</div><div class="line">   @Override</div><div class="line">   protected boolean isPermittedAll(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) &#123;</div><div class="line">      if (permissions != null &amp;&amp; !permissions.isEmpty()) &#123;</div><div class="line">            for (Permission permission : permissions) &#123;</div><div class="line">               authorizationValidate(permission);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">      return super.isPermittedAll(permissions, info);</div><div class="line">   &#125;</div><div class="line">    * 设定密码校验的Hash算法与迭代次数</div><div class="line">    */</div><div class="line">   @PostConstruct</div><div class="line">   public void initCredentialsMatcher() &#123;</div><div class="line">      HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(SystemService.HASH_ALGORITHM);</div><div class="line">      matcher.setHashIterations(SystemService.HASH_INTERATIONS);</div><div class="line">      setCredentialsMatcher(matcher);</div><div class="line">   &#125;</div><div class="line">   /**</div><div class="line">    * 获取系统业务对象</div><div class="line">    */</div><div class="line">   public SystemService getSystemService() &#123;</div><div class="line">      if (systemService == null)&#123;</div><div class="line">         systemService = SpringContextHolder.getBean(SystemService.class);</div><div class="line">      &#125;</div><div class="line">      return systemService;</div><div class="line">   &#125;</div><div class="line">   /**</div><div class="line">    * 授权用户信息</div><div class="line">    */</div><div class="line">   public static class Principal implements Serializa&#123;</div><div class="line">      private static final long serialVersionUID = 1L;</div><div class="line">      private String id; // 编号</div><div class="line">      private String loginName; // 登录名</div><div class="line">      private String name; // 姓名</div><div class="line">      private boolean mobileLogin; // 是否手机登录</div><div class="line">      public Principal(User user, boolean mobileLogin) &#123;</div><div class="line">         this.id = user.getId();</div><div class="line">         this.loginName = user.getLoginName();</div><div class="line">         this.name = user.getName();</div><div class="line">         this.mobileLogin = mobileLogin;</div><div class="line">      &#125;</div><div class="line">      public String getId() &#123;</div><div class="line">         return id;</div><div class="line">      &#125;</div><div class="line">      public String getLoginName() &#123;</div><div class="line">         return loginName;</div><div class="line">         &#125;</div><div class="line">      public String getName() &#123;</div><div class="line">         return name;</div><div class="line">      &#125;</div><div class="line">      public boolean isMobileLogin() &#123;</div><div class="line">         return mobileLogin;</div><div class="line">      &#125;</div><div class="line">      /**</div><div class="line">       * 获取SESSIONID</div><div class="line">       */</div><div class="line">      public String getSessionid() &#123;</div><div class="line">         try&#123;</div><div class="line">            return (String) UserUtils.getSession().getId();</div><div class="line">         &#125;catch (Exception e) &#123;</div><div class="line">            return &quot;&quot;;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">      @Override</div><div class="line">      public String toString() &#123;</div><div class="line">         return id;</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shiro/" rel="tag">#shiro</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/30/fs-framework-springMVC/" rel="next" title="谈谈Spring MVC的使用心得">
+                <i class="fa fa-chevron-left"></i> 谈谈Spring MVC的使用心得
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/31/ts-shiro-authentication/"
+           data-title="Shiro——登录，岂止用户名和密码" data-url="http://yoursite.com/2016/08/31/ts-shiro-authentication/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/jin.jpg"
+               alt="上官成睿" />
+          <p class="site-author-name" itemprop="name">上官成睿</p>
+          <p class="site-description motion-element" itemprop="description">我，就爱追求“酷”</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先，shiro是什么？"><span class="nav-number">1.</span> <span class="nav-text">首先，shiro是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其次，shiro能做什么？"><span class="nav-number">2.</span> <span class="nav-text">其次，shiro能做什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我们从外部来看，Shiro如何完成工作？"><span class="nav-number">3.</span> <span class="nav-text">我们从外部来看，Shiro如何完成工作？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从-Shiro-内部来看下-Shiro-的架构"><span class="nav-number">4.</span> <span class="nav-text">从 Shiro 内部来看下 Shiro 的架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文末，说几句客套话"><span class="nav-number">5.</span> <span class="nav-text">文末，说几句客套话</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">上官成睿</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cooldsk-blogs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("s9tGKxttewlrHXIhwQa7cGih-gzGzoHsz", "lW0Nup72QVrAqSSqSrrh0EvV");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
