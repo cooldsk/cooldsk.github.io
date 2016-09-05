@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-2-content.png">
 <meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-3-architecture.png">
 <meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-4-process.png">
-<meta property="og:updated_time" content="2016-09-04T15:05:10.357Z">
+<meta property="og:updated_time" content="2016-09-05T13:19:27.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro——登录，岂止用户名和密码">
 <meta name="twitter:description" content="当然，所有这些技术，网上都有很多详细的教程，五花八门，中英文，可能需要自己筛选，在此我仅作为一个初学者，分享一下学习重点和收获。
@@ -341,7 +341,7 @@
 <p>　　一旦获得Subject，你就可以立即获得你希望用Shiro为当前用户做的90%的事情，如登录、登出、访问会话、执行授权检查等 - 稍后还会看到更多。这里的关键点是Shiro的API非常直观，因为它反映了开发者以‘每个用户’思考安全控制的自然趋势。同时，在代码的任何地方都能很轻松地访问Subject，允许在任何需要的地方进行安全操作。<br><strong>SecurityManager</strong><br>　　Subject的“幕后”推手是SecurityManager。Subject代表了当前用户的安全操作，SecurityManager则管理所有用户的安全操作。它是Shiro框架的核心，充当“保护伞”，引用了多个内部嵌套安全组件，它们形成了对象图。但是，一旦SecurityManager及其内部对象图配置好，它就会退居幕后，应用开发人员几乎把他们的所有时间都花在Subject API调用上。<br>那么，如何设置SecurityManager呢？嗯，这要看应用的环境。例如，Web应用通常会在Web.xml中指定一个Shiro Servlet Filter，这会创建SecurityManager实例，如果你运行的是一个独立应用，你需要用其他配置方式，但有很多配置选项。<br>　　一个应用几乎总是只有一个SecurityManager实例。它实际是应用的Singleton（尽管不必是一个静态Singleton）。跟Shiro里的几乎所有组件一样，SecurityManager的缺省实现是POJO，而且可用POJO兼容的任何配置机制进行配置 - 普通的Java代码、Spring XML、YAML、.properties和.ini文件等。基本来讲，能够实例化类和调用JavaBean兼容方法的任何配置形式都可使用。<br>为此，Shiro借助基于文本的INI配置提供了一个缺省的“公共”解决方案。INI易于阅读、使用简单并且需要极少依赖。你还能看到，只要简单地理解对象导航，INI可被有效地用于配置像SecurityManager那样简单的对象图。<br>Realms<br>　　Shiro的第三个也是最后一个概念是Realm。Realm充当了Shiro与应用安全数据间的“桥梁”或者“连接器”。也就是说，当切实与像用户帐户这类安全相关数据进行交互，执行认证（登录）和授权（访问控制）时，Shiro会从应用配置的Realm中查找很多内容。<br>从这个意义上讲，Realm实质上是一个安全相关的DAO：它封装了数据源的连接细节，并在需要时将相关数据提供给Shiro。当配置Shiro时，你必须至少指定一个Realm，用于认证和（或）授权。配置多个Realm是可以的，但是至少需要一个。<br>　　Shiro内置了可以连接大量安全数据源（又名目录）的Realm，如LDAP、关系数据库（JDBC）、类似INI的文本配置资源以及属性文件等。如果缺省的Realm不能满足需求，你还可以插入代表自定义数据源的自己的Realm实现。</p>
 </blockquote>
 <h4 id="从-Shiro-内部来看下-Shiro-的架构"><a href="#从-Shiro-内部来看下-Shiro-的架构" class="headerlink" title="从 Shiro 内部来看下 Shiro 的架构"></a>从 Shiro 内部来看下 Shiro 的架构</h4><blockquote>
-<p>　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-4-process.png" alt="process"><br>　　Subject：主体，可以看到主体可以是任何可以与应用交互的 “用户”；<br>　　SecurityManager：相当于 SpringMVC 中的 DispatcherServlet 或者 Struts2 中的 FilterDispatcher；是 Shiro 的心脏；所有具体的交互都通过<br>SecurityManager 进行控制；它管理着所有Subject、且负责进行认证和授权、及会话、缓存的管理。<br>　　Authenticator：认证器，负责主体认证的，这是一个扩展点，如果用户觉得 Shiro 默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；<br>　　Authrizer：授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能；<br>　　Realm：可以有 1 个或多个 Realm，可以认为是安全实体数据源，即用于获取安全实体的；可以是 JDBC 实现，也可以是 LDAP 实现，或者内存实现等等；由用户提供；注意：Shiro 不知道你的用户 / 权限存储在哪及以何种格式存储；所以我们一般在应用中都需要实现自己的 Realm；<br>　　SessionManager：如果写过 Servlet 就应该知道 Session 的概念，Session 呢需要有人去管理它的生命周期，这个组件就是 SessionManager；而 Shiro 并不仅仅可以用在 Web 环境，也可以用在如普通的 JavaSE 环境、EJB 等环境；所有呢，Shiro 就抽象了一个自己的 Session 来管理主体与应用之间交互的数据；这样的话，比如我们在 Web 环境用，刚开始是一台 Web 服务器；接着又上了台 EJB 服务器；这时想把两台服务器的会话数据放到一个地方，这个时候就可以实现自己的分布式会话（如把数据放到 Memcached 服务器）；<br>　　SessionDAO：DAO 大家都用过，数据访问对象，用于会话的 CRUD，比如我们想把 Session 保存到数据库，那么可以实现自己的 SessionDAO，通过如 JDBC 写到数据库；比如想把 Session 放到 Memcached 中，可以实现自己的 Memcached SessionDAO；另外 SessionDAO 中可以使用 Cache 进行缓存，以提高性能；<br>　　CacheManager：缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能<br>　　Cryptography：密码模块，Shiro 提高了一些常见的加密组件用于如密码加密 / 解密的。<br>接触shiro，了解以上内容是必要的。</p>
+<p>　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ts-shiro-autht-4-process.png" alt="process"><br>　　<strong>Subject</strong>：主体，可以看到主体可以是任何可以与应用交互的 “用户”；<br>　　<strong>SecurityManager</strong>：相当于 SpringMVC 中的 DispatcherServlet 或者 Struts2 中的 FilterDispatcher；是 Shiro 的心脏；所有具体的交互都通过<br>SecurityManager 进行控制；它管理着所有Subject、且负责进行认证和授权、及会话、缓存的管理。<br>　　<strong>Authenticator</strong>：认证器，负责主体认证的，这是一个扩展点，如果用户觉得 Shiro 默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；<br>　　<strong>Authrizer</strong>：授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能；<br>　　<strong>Realm</strong>：可以有 1 个或多个 Realm，可以认为是安全实体数据源，即用于获取安全实体的；可以是 JDBC 实现，也可以是 LDAP 实现，或者内存实现等等；由用户提供；注意：Shiro 不知道你的用户 / 权限存储在哪及以何种格式存储；所以我们一般在应用中都需要实现自己的 Realm；<br>　　<strong>SessionManager</strong>：如果写过 Servlet 就应该知道 Session 的概念，Session 呢需要有人去管理它的生命周期，这个组件就是 SessionManager；而 Shiro 并不仅仅可以用在 Web 环境，也可以用在如普通的 JavaSE 环境、EJB 等环境；所有呢，Shiro 就抽象了一个自己的 Session 来管理主体与应用之间交互的数据；这样的话，比如我们在 Web 环境用，刚开始是一台 Web 服务器；接着又上了台 EJB 服务器；这时想把两台服务器的会话数据放到一个地方，这个时候就可以实现自己的分布式会话（如把数据放到 Memcached 服务器）；<br>　　<strong>SessionDAO</strong>：DAO 大家都用过，数据访问对象，用于会话的 CRUD，比如我们想把 Session 保存到数据库，那么可以实现自己的 SessionDAO，通过如 JDBC 写到数据库；比如想把 Session 放到 Memcached 中，可以实现自己的 Memcached SessionDAO；另外 SessionDAO 中可以使用 Cache 进行缓存，以提高性能；<br>　　<strong>CacheManager</strong>：缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能<br>　　<strong>Cryptography</strong>：密码模块，Shiro 提高了一些常见的加密组件用于如密码加密 / 解密的。<br>　　接触shiro，了解以上内容是必要的。</p>
 </blockquote>
 <p>####实践收获</p>
 <blockquote>
@@ -460,7 +460,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -477,7 +477,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SpringMVC," />
+  <meta name="keywords" content="TCP," />
 
 
 
@@ -84,19 +84,25 @@
 
 
 
-<meta name="description" content="好记性不如烂文档
-　　曾经一个面试官问我“说说Spring MVC中用到的注解。” 当时不知道是我太紧张，还是太水，就说了个“@Controller”，理直气壮，居然都没有说“@RequestMapping”，哈哈哈…. 书到用时方恨少,我也来说说Spring MVC中的一些比较重要的，至少是应该知道的东西吧，权当是个人使用过程中的总结。一般开发项目，感觉都是从配置环境开始，没有环境，开发有点难，">
+<meta name="description" content="内容不够全面仔细，仅说明大致原理和过程。
+TCP与UDP区别？
+　　(1) TCP(Transmission Control Protocol 传输控制协议)，是面向连接的，提供可靠数据传输服务，而UDP(User Datagram Protocol，用户数据报协议)，是无连接的，两个进程通信前没有握手过程，提供的是不可靠数据传输服务，会出现丢包。　　(2) TCP协议还具有拥塞控制机制，抑制发送">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈Spring MVC的使用心得">
-<meta property="og:url" content="http://yoursite.com/2016/08/30/fs-framework-springMVC/index.html">
+<meta property="og:title" content="计算机网络问题">
+<meta property="og:url" content="http://yoursite.com/2016/06/15/ks-computeNetwork-TCP/index.html">
 <meta property="og:site_name" content="cooldsk's Blogs">
-<meta property="og:description" content="好记性不如烂文档
-　　曾经一个面试官问我“说说Spring MVC中用到的注解。” 当时不知道是我太紧张，还是太水，就说了个“@Controller”，理直气壮，居然都没有说“@RequestMapping”，哈哈哈…. 书到用时方恨少,我也来说说Spring MVC中的一些比较重要的，至少是应该知道的东西吧，权当是个人使用过程中的总结。一般开发项目，感觉都是从配置环境开始，没有环境，开发有点难，">
-<meta property="og:updated_time" content="2016-09-04T15:04:56.543Z">
+<meta property="og:description" content="内容不够全面仔细，仅说明大致原理和过程。
+TCP与UDP区别？
+　　(1) TCP(Transmission Control Protocol 传输控制协议)，是面向连接的，提供可靠数据传输服务，而UDP(User Datagram Protocol，用户数据报协议)，是无连接的，两个进程通信前没有握手过程，提供的是不可靠数据传输服务，会出现丢包。　　(2) TCP协议还具有拥塞控制机制，抑制发送">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-computeNetwork-tcpConn.jpg">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-computeNetwork-tcpDisConn.jpg">
+<meta property="og:updated_time" content="2016-09-05T13:59:17.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈谈Spring MVC的使用心得">
-<meta name="twitter:description" content="好记性不如烂文档
-　　曾经一个面试官问我“说说Spring MVC中用到的注解。” 当时不知道是我太紧张，还是太水，就说了个“@Controller”，理直气壮，居然都没有说“@RequestMapping”，哈哈哈…. 书到用时方恨少,我也来说说Spring MVC中的一些比较重要的，至少是应该知道的东西吧，权当是个人使用过程中的总结。一般开发项目，感觉都是从配置环境开始，没有环境，开发有点难，">
+<meta name="twitter:title" content="计算机网络问题">
+<meta name="twitter:description" content="内容不够全面仔细，仅说明大致原理和过程。
+TCP与UDP区别？
+　　(1) TCP(Transmission Control Protocol 传输控制协议)，是面向连接的，提供可靠数据传输服务，而UDP(User Datagram Protocol，用户数据报协议)，是无连接的，两个进程通信前没有握手过程，提供的是不可靠数据传输服务，会出现丢包。　　(2) TCP协议还具有拥塞控制机制，抑制发送">
+<meta name="twitter:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-computeNetwork-tcpConn.jpg">
 
 
 
@@ -117,9 +123,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/30/fs-framework-springMVC/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/06/15/ks-computeNetwork-TCP/"/>
 
-  <title> 谈谈Spring MVC的使用心得 | cooldsk's Blogs </title>
+  <title> 计算机网络问题 | cooldsk's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +255,7 @@
             
             
               
-                谈谈Spring MVC的使用心得
+                计算机网络问题
               
             
           </h1>
@@ -261,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-30T23:30:17+08:00" content="2016-08-30">
-              2016-08-30
+            <time itemprop="dateCreated" datetime="2016-06-15T20:30:39+08:00" content="2016-06-15">
+              2016-06-15
             </time>
           </span>
 
@@ -291,8 +297,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/30/fs-framework-springMVC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/fs-framework-springMVC/" itemprop="commentsCount"></span>
+                <a href="/2016/06/15/ks-computeNetwork-TCP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/ks-computeNetwork-TCP/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -302,7 +308,7 @@
 
           
           
-             <span id="/2016/08/30/fs-framework-springMVC/" class="leancloud_visitors" data-flag-title="谈谈Spring MVC的使用心得">
+             <span id="/2016/06/15/ks-computeNetwork-TCP/" class="leancloud_visitors" data-flag-title="计算机网络问题">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -324,20 +330,11 @@
       
 
       
-        <h4 id="好记性不如烂文档"><a href="#好记性不如烂文档" class="headerlink" title="好记性不如烂文档"></a>好记性不如烂文档</h4><blockquote>
-<p>　　曾经一个面试官问我“说说Spring MVC中用到的注解。” 当时不知道是我太紧张，还是太水，就说了个“@Controller”，理直气壮，居然都没有说“@RequestMapping”，哈哈哈…. 书到用时方恨少,我也来说说Spring MVC中的一些比较重要的，至少是应该知道的东西吧，权当是个人使用过程中的总结。<br>一般开发项目，感觉都是从配置环境开始，没有环境，开发有点难，至少看上去全是bug…<br>那先说Spring MVC的配置文件，web.xml和spring-mvc.xml</p>
-</blockquote>
-<h4 id="web-xml中一些常用的比较重要的配置"><a href="#web-xml中一些常用的比较重要的配置" class="headerlink" title="web.xml中一些常用的比较重要的配置"></a>web.xml中一些常用的比较重要的配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">!—加载spring</span> <span class="attr">config--</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:application-*.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>　　在Web容器启动时，加载其他配置文件，作为上下文初始化参数，这个是必要的，因为springMVC几乎都会与其他框架整合，如mybatis、shiro等。当然web容器启动时还会加载listener标签配置的属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;encoding&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;UTF-8&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">    &lt;init-param&gt;</div><div class="line">        &lt;param-name&gt;forceEncoding&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">    &lt;/init-param&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure></p>
-<p>　　这个配置我认为很重要，至少只要是在国内的项目，能不解决中文编码问题吗？而且这个配置要尽量在web.xml往前放置，否则配置不会生效！<br>　　至于dispatcherServlet就不赘述了，重要性不言而喻。</p>
-</blockquote>
-<h4 id="Spring-mvc-xml几个比较重要的配置"><a href="#Spring-mvc-xml几个比较重要的配置" class="headerlink" title="Spring-mvc.xml几个比较重要的配置"></a>Spring-mvc.xml几个比较重要的配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 加载配置属性文件 --&gt;</div><div class="line">&lt;context:property-placeholder ignore-unresolvable=&quot;true&quot; location=&quot;classpath:application.properties&quot; /&gt;</div><div class="line"></div><div class="line">&lt;!-- 使用Annotation自动注册Bean,只扫描@Controller --&gt;</div><div class="line">&lt;context:component-scan base-package=&quot;cn.gukeer&quot; use-default-filters=&quot;false&quot;&gt;&lt;!—多个package用”,”分割 --&gt;</div><div class="line">&lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;</div><div class="line">&lt;/context:component-scan&gt;</div><div class="line"></div><div class="line">&lt;!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 --&gt;</div><div class="line">&lt;mvc:default-servlet-handler /&gt;</div><div class="line">&lt;!-- 静态资源映射 --&gt;</div><div class="line">&lt;mvc:resources mapping=&quot;/assets/**&quot; location=&quot;/assets/&quot; cache-period=&quot;31536000&quot;/&gt;</div><div class="line"></div><div class="line">&lt;!-- 默认的请求路径 --&gt;</div><div class="line">&lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;redirect:/index&quot;/&gt;</div></pre></td></tr></table></figure>
-<p>####Controller中</p>
-<blockquote>
-<p>　　说两个注解@RequestParam和@ModelAttribute<br>　　(1) @RequsetParam(value=””,required=””)<br>　　　注解方法参数，以将请求参数绑定到方法参数上，可以指定value的值来匹配请求参数，这时value值和请求参数name应该对应，而name与方法参数可以不一致，required用来设置这个请求参数是否必须的，true为必须，false表示可没有该参数。<br>如public String login(@RequestParam(value=”username”,required=false)String name,…)则表示前台可以传递name值为username的参数。<br> 　　(2) @ModelAttibute<br>　　　1) 绑定请求参数到命令对象,有value和required属性放在功能处理方法的入参上时，用于将多个请求参数绑定到一个命令对象，从而简化绑定流程，而且自动暴露为模型数据用于视图页面展示时使用；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public String test1(@ModelAttribute(&quot;user&quot;) UserModel user)</div></pre></td></tr></table></figure></p>
-<p>只是此处多了一个注解@ModelAttribute(“user”)，它的作用是将该绑定的命令对象以“user”为名称添加到模型对象中供视图页面展示使用。我们此时可以在视图页面使用${user.username}来获取绑定的命令对象的属性。<br>　　　2)在Spring MVC里，@ModelAttribute通常使用在Controller方法的参数注解中，用于解释model entity，但同时，也可以放在方法注解里。<br>如果把@ModelAttribute放在方法的注解上时，代表的是：该Controller的所有方法在调用前，先执行此@ModelAttribute方法,若有返回值，则自动将返回值放入model中，传递给url实际请求的方法,并绑定到相应参数。如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Controller</div><div class="line">@RequestMapping(value = &quot;/zsfb/zsTask&quot;)</div><div class="line">public class ZsTaskController extends BaseController &#123;</div><div class="line">    @Autowired</div><div class="line">    private ZsTaskService zsTaskService;</div><div class="line">    @ModelAttribute</div><div class="line">    public ZsTask get(@RequestParam(required = false) String id) &#123;</div><div class="line">        ZsTask entity = null;</div><div class="line">        if (StringUtils.isNotBlank(id)) &#123;</div><div class="line">            entity = zsTaskService.get(id);</div><div class="line">        &#125;</div><div class="line">        if (entity == null) &#123;</div><div class="line">            entity = new ZsTask();</div><div class="line">            entity.setScsjqr(ZsTaskConstant.NO);</div><div class="line">            entity.setFbcg(ZsTaskConstant.NO);</div><div class="line">        &#125;</div><div class="line">        return entity;</div><div class="line">    &#125;</div><div class="line">@RequestMapping(value = &quot;form&quot;)</div><div class="line">public String form(ZsTask zsTask, Model model) &#123;</div><div class="line">    model.addAttribute(&quot;zsTask&quot;, zsTask);</div><div class="line">    return &quot;zsfb/zsTaskForm&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在这段代码中get方法返回的ZsTask(entity)将被绑定到form的zsTask中。</p>
+        <p>内容不够全面仔细，仅说明大致原理和过程。</p>
+<h4 id="TCP与UDP区别？"><a href="#TCP与UDP区别？" class="headerlink" title="TCP与UDP区别？"></a>TCP与UDP区别？</h4><blockquote>
+<p>　　(1) TCP(Transmission Control Protocol 传输控制协议)，是面向连接的，提供可靠数据传输服务，而UDP(User Datagram Protocol，用户数据报协议)，是无连接的，两个进程通信前没有握手过程，提供的是不可靠数据传输服务，会出现丢包。<br>　　(2) TCP协议还具有拥塞控制机制，抑制发送方进程，限制每个TCP连接，使它们达到公平共享网络带宽。而UDP没有拥塞控制机制，发送端可以以任何速率向网络层注入数据，适合用于有最低带宽限制的实时音频/视频通信。<br>　　(3) UDP分组首部开销比TCP小，每个TCP首部有20字节开销，而UDP只有8字节。</p>
+<h4 id="TCP如何保证可靠传输？三次握手过程？"><a href="#TCP如何保证可靠传输？三次握手过程？" class="headerlink" title="TCP如何保证可靠传输？三次握手过程？"></a>TCP如何保证可靠传输？三次握手过程？</h4><p>　　(1) TCP报文段的首部提供序列号，以便接收方根据序列号是否相同判定是否出现数据冗余<br>　　(2)TCP只提供肯定确认（ACK），通过TCP报文段首部确认号体现，即发送方期望从接收方收到的下一个字节的序号<br>　　(3)TCP报文段提供首部校验和，检测一个传输分组是否出现比特错误。<br>　　(4)当发送方向接收方传输分组时。出现丢包或者比特差错后，接受方都不会返回发送方发送这个分组时期待的确认号。因·此在TCP中发送方为每个分组提供单一计时器，当发送方发送分组时总是会启动对应的计时器，在计时器超时后发送方如果还没有收到期待的确认号，就会重传该分组，并且采用加倍超时间隔机制，每次重传都会把计时器下一次超时间隔加倍。TCP也采用快速重传的机制，即接受方如果收到比期望序号大的报文段时，就会立即发送三个冗余ACK，这个ACK就是期待接受的ACK号（比刚收到的序号小），当发送端接收到三个冗余ACK后，即使计时器未超时，也会重传对应序号报文段。<br>　　(5)TCP采用累积确认方式，发送方如果收到更大ACK后会认为比该ACK小的报文段都收到了，即接收方返回的更小ACK丢失情况下。但接收方收到无序分组时而且中间某一个分组丢失时，仅要求重传该分组，即选择确认。TCP差错恢复机制也行被划分为回退N协议和选择重传的混合体。<br><strong>三次握手过程？</strong><br>　<img src="http://oa6v84q1e.bkt.clouddn.com/ks-computeNetwork-tcpConn.jpg" alt="TCPConnection"><br>　　①客户端首先向服务器端发送一个特殊TCP报文，该报文不包含应用层数据，也称为SYN报文段，报文首部，SYS标志位被置1，序号字段被一个起始序列号（client-isn）填充，最后将该报文段封装在IP数据包中发送给服务器。<br>　　②服务器端接受到该报文段后，为TCP连接分配缓存和变量，并向客户端发送允许连接报文段，也被成为SYNACK报文段，该报文段SYN比特位被置1，首部确认号为接收到的报文段序号+1，服务器选择自己初始序号并放置在首部序号字段。<br>　　③客服端收到SYNACK报文段后也要为该连接分配缓存和变量，并回复报文段以对允许连接的报文进行确认，由于连接已经建立，故SYN位被置为0，确认号为收到的SYNACK报文序号+1.三次握手完成<br><strong>四次分手过程？</strong><br>　　　　　　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ks-computeNetwork-tcpDisConn.jpg" alt="TCPDisConnection"><br>　　①参与连接的两个进程中的任何一个都能终止连接<br>　　②若客户端发起关闭，则发送一个特殊TCP报文段,该报文段首部FIN标志位被置1，进入FIN_WAIT_1状态，此状态等待服务器回复带有确认信息的报文段，服务器收到该报文段后向客户端回送一个确认报文段，客户端进入FIN_WAIT_2状态，等待服务器发送FIN位被置1的报文段。<br>　　③之后，服务器发送终止报文段，其FIN比特位被置1，客户端对这个服务器的终止报文段进行确认，进入TIME_WAIT状态，使得客户端能够重传确认报文，防止ACK丢失，时间一般为30秒，1或2分钟。</p>
+<h4 id="常见HTTP状态码"><a href="#常见HTTP状态码" class="headerlink" title="常见HTTP状态码"></a>常见HTTP状态码</h4><p><strong>100 (Continue/继续)</strong><br>　　如果服务器收到头信息中带有100-continue的请求，这是指客户端询问是否可以在后续的请求中发送附件。在这种情况下，服务器用100(SC_CONTINUE)允许客户端继续或用417 (Expectation Failed)告诉客户端不同意接受附件。这个状态码是 HTTP 1.1中新加入的<br><strong>200 OK</strong><br>　　表示请求成功 一切正常<br><strong>301 Moved Permanently</strong><br>　　请求重定向，客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL<br><strong>302 Found</strong><br>　　临时重定向，类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。<br><strong>304 Not Modified</strong><br>　　客户端有缓冲的文档并发出了一个条件性的请求。服务器告诉客户，原来缓冲的文档还可以继续使用。<br><strong>400 Bad Request</strong><br>　　请求出现语法错误。<br><strong>403 Forbidden</strong><br>　　资源不可用。<br><strong>404 Not Found</strong><br>　　无法找到指定位置的资源。<br><strong>405 Method Not Allowed</strong><br>　　请求方法（GET、POST、HEAD、Delete、PUT、TRACE等）对指定的资源不适用。<br><strong>500 Internal Server Error</strong><br>　　服务器遇到了意料不到的情况，不能完成客户的请求。<br><strong>501 Not Implemented</strong><br>　　服务器不支持实现请求所需要的功能。</p>
 </blockquote>
 
       
@@ -361,7 +358,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SpringMVC/" rel="tag">#SpringMVC</a>
+            <a href="/tags/TCP/" rel="tag">#TCP</a>
           
         </div>
       
@@ -370,16 +367,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/29/ts-database-Flydb/" rel="next" title="一个比较“酷”的数据库版本控制工具-flyway">
-                <i class="fa fa-chevron-left"></i> 一个比较“酷”的数据库版本控制工具-flyway
+              <a href="/2016/06/10/ls-java-Focus/" rel="next" title="Java的一些重点">
+                <i class="fa fa-chevron-left"></i> Java的一些重点
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/31/ts-shiro-authentication/" rel="prev" title="Shiro——登录，岂止用户名和密码">
-                Shiro——登录，岂止用户名和密码 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/11/ps-football-EuropeanCup/" rel="prev" title="欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷”">
+                欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷” <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -406,8 +403,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/30/fs-framework-springMVC/"
-           data-title="谈谈Spring MVC的使用心得" data-url="http://yoursite.com/2016/08/30/fs-framework-springMVC/">
+      <div class="ds-thread" data-thread-key="2016/06/15/ks-computeNetwork-TCP/"
+           data-title="计算机网络问题" data-url="http://yoursite.com/2016/06/15/ks-computeNetwork-TCP/">
       </div>
     
   </div>
@@ -498,7 +495,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#好记性不如烂文档"><span class="nav-number">1.</span> <span class="nav-text">好记性不如烂文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web-xml中一些常用的比较重要的配置"><span class="nav-number">2.</span> <span class="nav-text">web.xml中一些常用的比较重要的配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-mvc-xml几个比较重要的配置"><span class="nav-number">3.</span> <span class="nav-text">Spring-mvc.xml几个比较重要的配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP与UDP区别？"><span class="nav-number">1.</span> <span class="nav-text">TCP与UDP区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP如何保证可靠传输？三次握手过程？"><span class="nav-number">2.</span> <span class="nav-text">TCP如何保证可靠传输？三次握手过程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">常见HTTP状态码</span></a></li></ol></div>
             
           </div>
         </section>
