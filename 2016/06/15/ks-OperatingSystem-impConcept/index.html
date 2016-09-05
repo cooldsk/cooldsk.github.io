@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OperatingSystem," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="堆和栈
+　　由编译器自动分配和释放，存放函数的参数值、局部变量的值，操作方式类似于数据结构中的栈（后进栈，先出栈）　　一般由程序员分配和释放，若程序员不释放，程序结束时可能由OS回收，与数据结构中的堆是两码事，操作方式类似于链表
+进程与线程　　1)通俗的讲进程可以看做是执行中的程序，但它包含程序代码、程序计数器和寄存器的值（即当前活动）、堆栈段（stack,包括临时数据，如函数参数，局部参数和返回">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统中的一些概念">
+<meta property="og:url" content="http://yoursite.com/2016/06/15/ks-OperatingSystem-impConcept/index.html">
+<meta property="og:site_name" content="cooldsk's Blogs">
+<meta property="og:description" content="堆和栈
+　　由编译器自动分配和释放，存放函数的参数值、局部变量的值，操作方式类似于数据结构中的栈（后进栈，先出栈）　　一般由程序员分配和释放，若程序员不释放，程序结束时可能由OS回收，与数据结构中的堆是两码事，操作方式类似于链表
+进程与线程　　1)通俗的讲进程可以看做是执行中的程序，但它包含程序代码、程序计数器和寄存器的值（即当前活动）、堆栈段（stack,包括临时数据，如函数参数，局部参数和返回">
+<meta property="og:updated_time" content="2016-09-05T15:10:35.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统中的一些概念">
+<meta name="twitter:description" content="堆和栈
+　　由编译器自动分配和释放，存放函数的参数值、局部变量的值，操作方式类似于数据结构中的栈（后进栈，先出栈）　　一般由程序员分配和释放，若程序员不释放，程序结束时可能由OS回收，与数据结构中的堆是两码事，操作方式类似于链表
+进程与线程　　1)通俗的讲进程可以看做是执行中的程序，但它包含程序代码、程序计数器和寄存器的值（即当前活动）、堆栈段（stack,包括临时数据，如函数参数，局部参数和返回">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/15/ks-OperatingSystem-impConcept/"/>
+
+  <title> 操作系统中的一些概念 | cooldsk's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">cooldsk's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                操作系统中的一些概念
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-15T14:20:12+08:00" content="2016-06-15">
+              2016-06-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/15/ks-OperatingSystem-impConcept/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/ks-OperatingSystem-impConcept/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/15/ks-OperatingSystem-impConcept/" class="leancloud_visitors" data-flag-title="操作系统中的一些概念">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h4><blockquote>
+<p>　　由编译器自动分配和释放，存放函数的参数值、局部变量的值，操作方式类似于数据结构中的栈（后进栈，先出栈）<br>　　一般由程序员分配和释放，若程序员不释放，程序结束时可能由OS回收，与数据结构中的堆是两码事，操作方式类似于链表</p>
+<h4 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h4><p>　　1)通俗的讲进程可以看做是执行中的程序，但它包含程序代码、程序计数器和寄存器的值（即当前活动）、堆栈段（stack,包括临时数据，如函数参数，局部参数和返回地址 ）、数据段（包括全局变量），还可能包含堆(heap,是在进程运行期间动态分配的内存）。<br>进程是活动的实体，当可执行文件被装入内存时，一个程序才能成为进程。<br>　　2)进程是大多数系统中的工作单元，系统由一组进程组成：操作系统进程执行系统代码，用户进程执行用户代码，所有这些进程可以并发执行，通过进程之间切换，操作系统能使计算机运行更高效。进程管理也由操作系统负责，目前大多数现代操作系统支持多线程进程。<br>　　3)进程有新建、就绪、运行、等待、终止等状态，一次只有一个进程在一个处理上运行，但多个进程可处于就绪或等待状态。</p>
+</blockquote>
+<p><strong>进程状态</strong></p>
+<blockquote>
+<p>新建：进程正在被创建<br>　　就绪：进程等待分配CPU资源和时间片<br>　　运行：指令正在被执行，最终完成，或被中断或等待特定事件发生（I/O请求）<br>　　等待：进程等待某个事件的发生（如I/O完成或收到信号）<br>　　终止：进程完成执行<br>   　　每个进程在操作系统内用进程控制块（process control block,PCB,也称为任务控制块）表示。</p>
+</blockquote>
+<p><strong>进程调度</strong></p>
+<blockquote>
+<p>　　进程被放到大容量存储设备（通常为磁盘）的缓冲池中，保存在那里以便以后执行。<strong>长期调度程序（或作业调度程序）</strong>从该池中选择进程，并装入内存已准备执行，必须合理选择一组包含以I/O为主的和以CPU为主的进程组合，通常数分钟执行一次，取决于多道程序设计的程度，有些系统可能没有或很少有长期调度程序，如UNIX和微软Windows的分时系统。<strong>短期调度程序（CPU调度程序）</strong>从准备执行的进程中选择进程，并为之分配CPU，通常没100ms至少执行一次，故要求短期调度程度必须要快。<br>　　将CPU切换到另一个进程需要保存当前进程的状态并恢复另一个进程的状态，这一任务称为上下文切换。</p>
+</blockquote>
+<p><strong>进程创建</strong></p>
+<blockquote>
+<p>　　绝大多数系统内的进程能并发执行，它们可以动态创建和删除。通过创建进程系统调用创建多个新进程，创建进程称为父进程，而新进程称为子进程。<br>进程通唯一的进程标识付（process identifier, pid）来标识，pid通常是一个整数值。<br>　　进程需要一定的资源来完成其任务，在一个进程创建子进程时：<br>　　　1）子进程可能从操作系统那里直接获得资源<br>　　　2）可能从父进程获得资源。<br>　　　3）父进程可能必须在其子进程之间分配资源或共享资源（如内存或文件），限制子进程只能使用父进程的资源能防止创建过多的进程带来的系统超载。<br>　　　4）初始化数据（或输入）由父进程传递给子进程。<br>　　进程创建新进程时，有两种执行可能：<br>　　　1）父进程与子进程并发执行<br>　　　2）父进程等待，直到某个或全部子进程执行完。<br>　　新进程地址空间有两种可能：<br>　　　1）子进程是父进程的复制品，即具有与父进程相同的程序和数据。<br>　　　2）子进程装入另一个新程序。<br>　　UNIX操作系统中，通过fork()系统调用，可创建新进程。新进程通过复制原来进程的地址空间而成。这允许父子进程方便地通信。两个进程都继续执行位于系统调用fork()之后的指令。区别是对子进程，系统调用fork()的返回值为0；对父进程，返回值为子进程的进程标识符（非零）。<br>　　在系统调用fork()之后，一个进程会使用系统调用exex()，以用新程序来取代进程的地址空间。Exec()将二进制文件装入内存，并开始执行。父进程能创建更多的子进程，或者在子进程运行时没有什么可做，调用wait()把自己移出就绪队列等待子进程终止。<br>　　Win32 API采用CreateProcess()（与fork()类似）函数创建进程，需要将一个特殊程序装入子进程的地址空间，与fork()不需要传递参数不同，CreateProcess()至少要10个参数。</p>
+</blockquote>
+<p><strong>进程终止</strong></p>
+<blockquote>
+<p>　　当进程执行完成最后的语句并使用系统调用exit()请求操作系统删除自身时，进程终止。此时进程可以返回状态值（常为整数）到父进程（通过系统调用wait()）。所有进程资源都会被操作系统释放。<br>　　父进程可以通过适当的系统调用（如win32的TerminateProcess()）来终止其子进程，父进程需要知道所有子进程的标识符，因此在创建子进程时，子进程标识符要传给父进程。<br>　　当子进程使用了超过它分配到的一些资源，或分配给它的任务不再需要，或者父进程退出时，父进程会终止其子进程。如果一个进程终止（正常或不正常），那么它所有子进程也将终止，这称为级联终止（如VMS系统）。UNIX系统中系统调用wait()返回了终止子进程的标识符，以使父进程知道哪个子进程终止了，如果父进程终止，那么所有子进程以init进程作为父进程，因此子进程仍有一个父进程收集状态和执行统计。</p>
+</blockquote>
+<p><strong>进程间通信</strong></p>
+<blockquote>
+<p>　　如果系统中一个进程能影响其他进程或被其他进程所影响，那么该进程是协作的，反正为独立的，协作进程需要一种进程间通信机制（interprocess communication,IPC）来允许进程相互交换数据与信息。<br>进程间通信有两种基本模式: 1)共享内存 2)消息传递<br>　　1)共享内存<br>　　 建立一块供协作进程共享的内存区域，进程间通过向此共享区域读或写入数据来交换信息。共享内存比消息传递快，消息传递系统通常需要系统调用来实现，因此需要更多的内核介入的时间消耗。在共享内存系统中，仅在建立共享内存区域时需要系统调用。<br>　　2)消息传递<br>  　　通过在协作进程间交换信息来实现通信。消息传递对于交换较少数量的数据很有用，因为不需要避免冲突。对于计算机的通信，消息传递也比共享内存更容易实现。<br>　　<strong>共享内存系统</strong><br> 　　采用共享内存的进程间通信需要通信进程建立共享内存区域。通常一块共享内存区域驻留在生成共享内存段进程的地址空间。其他希望使用此共享内存段进行通信的进程必须将此放到它们自己的地址空间。共享内存需要取消 操作系统试图阻止一个进程范围另一个进程的内存 这一限制，进程间通过在共享内存区域内读或写来交换信息，并保证它们不会向同一区域同时写数据。<br> 　　内存共享是解决生产者-消费者问题方法中的一种。使用一个缓冲（驻留在生产者进程和消费者进程的共享内存区域内）来被生产者填充并被消费者使用。<br>　　<strong>消息传递系统</strong><br>　　由操作系统提供机制，让协作进程能通过消息传递工具来进行通信。在分布式环境中特别有用。如果进程P和Q需要通信，那么它们必须彼此相互发送消息和接收消息，它们之间必须要有通信线路。<br>　　逻辑实现线路和send()/receive()操作的方法:<br>　　　1)直接或间接通信<br>　　　2)同步或异步通信<br>　　　3)自动或显示缓冲<br>　　<strong>命名</strong><br>  　　需要通信的进程必须有一个方法以互相引用，它们可以使用直接或间接通信。<br>  　　直接通信，需要通信的每个进程必须明确地命名通信的接收者或发送者。原语send()和reveive()定义如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Send(P,message):发送消息到进程P</div><div class="line">Receive(Q,message):接收来自进程Q的消息</div></pre></td></tr></table></figure></p>
+<p>　　需要通信的每对进程之间自动建立线路，进程仅需知道相互通信的标识符。<br>　　一个线路只与两个进程相关。<br>　　每对进程间只有一个线路。<br>　　这种方案展示了对称寻址，即发送和接收进程必须命名对方以便通信。<br>　　非对称寻址，即只要发送者命名接收者，而接收者不需要命名发送者，原语send()和receive()定义如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Send(P,message):发送消息到进程P</div><div class="line">Receive(id,message):接收来自任何进程的消息，变量id设置成与其通信的进程名称。</div></pre></td></tr></table></figure></p>
+<p>　　对称和非对称寻址方案的:缺点是限制了进程定义的模块化。改变进程的名称必须检所有其他进程定义，所有旧名称的引用都必须找到，以修改成为新名称。与间接调用相比这个标识符必需指出的硬编码技术用得更少。<br>　　<strong>间接通信</strong><br>　　通过邮箱或端口来发送和接收消息的，邮箱可以抽象成一个对象，进程可以向其中存放消息，也可从中删除消息，每个邮都有一个唯一的标识符（如POSIX消息队列采用一个整数值来标识一个邮箱）。对于这种方案，一个进程可能通过许多不同的邮箱与其他进程通信，但两个进程仅在其共享一个邮箱时可相互通信。原语send()和receive()定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Send(A,message):发送一个消息到邮箱A</div><div class="line">Receive(A,message):接收来自邮箱A的消息</div></pre></td></tr></table></figure></p>
+<p>　　仅在两个进程共享一个邮箱时，才能建立通信线路。<br>　　一个线路可以与两个或更多的进程相关联。<br>　　两个通信进程可有多个不同的线路，每个线路对应于一个邮箱。<br>接收消息时，可以一次最多允许一个进程执行receive()操作，允许系统随意选择一个进程接收消息。进程或操作系统可以拥有邮箱，若为进程拥有，拥有邮箱的进程只能通过邮箱接收消息，拥有的进程终止，那邮箱消失。若为操作系统所拥有的邮箱时独立存在，不属于某个特定的进程。操作系统必须提供机制以允许进程创建新邮箱，通过邮箱发送和接收消息，删除邮箱。<br>　　<strong>同步</strong><br>　　进程间的通信通过原语send()和receive()来进行，这些原语的实现由不同的设计选项。消息传递可以是阻塞或非阻塞，也称为同步或异步。<br>　　阻塞send:发送进程阻塞，直到消息被接收进程或邮箱所接收。<br>　　非阻塞send:发送进程发送消息并再继续操作。<br>　　阻塞receive:接收者阻塞，直到有消息可用。<br>　　非阻塞receive：接收者收到一个有效消息或空消息。它们可以进行多种组合<br>　　不管通信是直接的还是间接的，通信进程所交换的消息都驻留在临时队列中。零容量，线路中不能有任何消息等待处理；有限容量，队列长度为n，最多有n个消息驻留其中。无限容量，队列长度可以无限，不断多少消息都可以在其中等待，从不阻塞发送者。</p>
+</blockquote>
+<h4 id="Linux进程间通信"><a href="#Linux进程间通信" class="headerlink" title="Linux进程间通信"></a>Linux进程间通信</h4><blockquote>
+<p>　　Linux基本上逐步实现了POSIX（Portable Operating System Interface（可移植操作系统接口）的缩写，而X则表明其对Unix API的传承）兼容。<br>　　1)管道（Pipe）及有名管道（named pipe）：管道可用于具有亲缘关系进程间的通信，有名管道克服了管道没有名字的限制，因此，除具有管道所具有的功能外，它还允许无亲缘关系进程间的通信；<br>　　2)信 号（Signal）：信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程间通信外，进程还可以发送信号给进程本身；linux除了 支持Unix早期信号语义函数sigal外，还支持语义符合Posix.1标准的信号函数sigaction（实际上，该函数是基于BSD的，BSD为了 实现可靠信号机制，又能够统一对外接口，用sigaction函数重新实现了signal函数）；<br>　　3)报文（Message）队列（消息队列）：消息队列是消息的链接表，包括Posix消息队列system V消息队列。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点。<br>　　4)共享内存：使得多个进程可以访问同一块内存空间，是最快的可用IPC形式。是针对其他通信机制运行效率较低而设计的。往往与其它通信机制，如信号量结合使用，来达到进程间的同步及互斥。<br>　　5)信号量（semaphore）：主要作为进程间以及同一进程不同线程之间的同步手段。<br>　　6)套接口（Socket）：更为一般的进程间通信机制，可用于不同机器之间的进程间通信。起初是由Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：Linux和System V的变种都支持套接字。<br>　　一般来说，linux下的进程包含以下几个关键要素：<br>　　有一段可执行程序；<br>　　有专用的系统堆栈空间；<br>　　内核中有它的控制块（进程控制块），描述进程所占用的资源，这样，进程才能接受内核的调度；<br>　　具有独立的存储空间</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OperatingSystem/" rel="tag">#OperatingSystem</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/10/ls-java-Focus/" rel="next" title="Java的一些重点">
+                <i class="fa fa-chevron-left"></i> Java的一些重点
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/15/ks-computeNetwork-TCP/" rel="prev" title="计算机网络问题">
+                计算机网络问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/15/ks-OperatingSystem-impConcept/"
+           data-title="操作系统中的一些概念" data-url="http://yoursite.com/2016/06/15/ks-OperatingSystem-impConcept/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/jin.jpg"
+               alt="上官成睿" />
+          <p class="site-author-name" itemprop="name">上官成睿</p>
+          <p class="site-description motion-element" itemprop="description">真酷~</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆和栈"><span class="nav-number">1.</span> <span class="nav-text">堆和栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程与线程"><span class="nav-number">2.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux进程间通信"><span class="nav-number">3.</span> <span class="nav-text">Linux进程间通信</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">上官成睿</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cooldsk-blogs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("s9tGKxttewlrHXIhwQa7cGih-gzGzoHsz", "lW0Nup72QVrAqSSqSrrh0EvV");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
