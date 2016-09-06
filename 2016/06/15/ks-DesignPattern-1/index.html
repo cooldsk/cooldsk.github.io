@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Database,flyway," />
+  <meta name="keywords" content="DesignPattern," />
 
 
 
@@ -84,33 +84,27 @@
 
 
 
-<meta name="description" content="配一张天使图，那就直接开始!
-Why database migrations?
-　　(1)让我们从零开始并假设有一个叫Shiny的项目，它的最初的可交付的产品是一款叫Shiny Soft的软件，它连接的数据是Shiny DB。　　(2)用以下这个最简洁的图标来代表这个项目　　　　　　　　　　　　　　对于大多数项目而言，它呈现的视图会很快转化为以下这样">
+<meta name="description" content="单例模式
+　　Ensure a class has only instance, and provide a global point of access to it.　　确保一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。通过私有的构造函数确保在一个应用中只产生一个实例，并且是自行实例化的。
+
+饿汉式单例（线程安全）123456public class Singleton()&amp;#12">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个比较“酷”的数据库版本控制工具-flyway">
-<meta property="og:url" content="http://yoursite.com/2016/08/29/ts-database-Flydb/index.html">
+<meta property="og:title" content="我理解的设计模式，好像有点缺乏实践">
+<meta property="og:url" content="http://yoursite.com/2016/06/15/ks-DesignPattern-1/index.html">
 <meta property="og:site_name" content="cooldsk's Blogs">
-<meta property="og:description" content="配一张天使图，那就直接开始!
-Why database migrations?
-　　(1)让我们从零开始并假设有一个叫Shiny的项目，它的最初的可交付的产品是一款叫Shiny Soft的软件，它连接的数据是Shiny DB。　　(2)用以下这个最简洁的图标来代表这个项目　　　　　　　　　　　　　　对于大多数项目而言，它呈现的视图会很快转化为以下这样">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/1flyway-logo-tm.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/2SimpleView.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/3Environments.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/4SoftGreen.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/5DbRed.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/6EmptyDb.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/7EmptySchemaVersion.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/8Migration-1-2.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/9PendingMigration.png">
-<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/10Migration21.png">
-<meta property="og:updated_time" content="2016-09-05T15:22:10.940Z">
+<meta property="og:description" content="单例模式
+　　Ensure a class has only instance, and provide a global point of access to it.　　确保一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。通过私有的构造函数确保在一个应用中只产生一个实例，并且是自行实例化的。
+
+饿汉式单例（线程安全）123456public class Singleton()&amp;#12">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-designPattern-TemplateMethod.jpg">
+<meta property="og:updated_time" content="2016-09-06T05:25:40.923Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个比较“酷”的数据库版本控制工具-flyway">
-<meta name="twitter:description" content="配一张天使图，那就直接开始!
-Why database migrations?
-　　(1)让我们从零开始并假设有一个叫Shiny的项目，它的最初的可交付的产品是一款叫Shiny Soft的软件，它连接的数据是Shiny DB。　　(2)用以下这个最简洁的图标来代表这个项目　　　　　　　　　　　　　　对于大多数项目而言，它呈现的视图会很快转化为以下这样">
-<meta name="twitter:image" content="http://oa6v84q1e.bkt.clouddn.com/1flyway-logo-tm.png">
+<meta name="twitter:title" content="我理解的设计模式，好像有点缺乏实践">
+<meta name="twitter:description" content="单例模式
+　　Ensure a class has only instance, and provide a global point of access to it.　　确保一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。通过私有的构造函数确保在一个应用中只产生一个实例，并且是自行实例化的。
+
+饿汉式单例（线程安全）123456public class Singleton()&amp;#12">
+<meta name="twitter:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-designPattern-TemplateMethod.jpg">
 
 
 
@@ -131,9 +125,9 @@ Why database migrations?
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/29/ts-database-Flydb/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/06/15/ks-DesignPattern-1/"/>
 
-  <title> 一个比较“酷”的数据库版本控制工具-flyway | cooldsk's Blogs </title>
+  <title> 我理解的设计模式，好像有点缺乏实践 | cooldsk's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +257,7 @@ Why database migrations?
             
             
               
-                一个比较“酷”的数据库版本控制工具-flyway
+                我理解的设计模式，好像有点缺乏实践
               
             
           </h1>
@@ -275,8 +269,8 @@ Why database migrations?
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-29T23:30:17+08:00" content="2016-08-29">
-              2016-08-29
+            <time itemprop="dateCreated" datetime="2016-06-15T20:30:39+08:00" content="2016-06-15">
+              2016-06-15
             </time>
           </span>
 
@@ -289,8 +283,8 @@ Why database migrations?
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术分享/" itemprop="url" rel="index">
-                    <span itemprop="name">技术分享</span>
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
                   </a>
                 </span>
 
@@ -305,8 +299,8 @@ Why database migrations?
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/29/ts-database-Flydb/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/29/ts-database-Flydb/" itemprop="commentsCount"></span>
+                <a href="/2016/06/15/ks-DesignPattern-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/ks-DesignPattern-1/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,7 +310,7 @@ Why database migrations?
 
           
           
-             <span id="/2016/08/29/ts-database-Flydb/" class="leancloud_visitors" data-flag-title="一个比较“酷”的数据库版本控制工具-flyway">
+             <span id="/2016/06/15/ks-DesignPattern-1/" class="leancloud_visitors" data-flag-title="我理解的设计模式，好像有点缺乏实践">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -338,18 +332,31 @@ Why database migrations?
       
 
       
-        <p>　　　　　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/1flyway-logo-tm.png" alt="flywaydb"><br>　　　　　  　　　　　　　　　<em>配一张天使图，那就直接开始!</em></p>
-<h4 id="Why-database-migrations"><a href="#Why-database-migrations" class="headerlink" title="Why database migrations?"></a>Why database migrations?</h4><blockquote>
-<p>　　(1)让我们从零开始并假设有一个叫Shiny的项目，它的最初的可交付的产品是一款叫Shiny Soft的软件，它连接的数据是Shiny DB。<br>　　(2)用以下这个最简洁的图标来代表这个项目<br>　　　　　　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/2SimpleView.png" alt="simpleproject"><br>　　　<br>　　对于大多数项目而言，它呈现的视图会很快转化为以下这样:<br>       <img src="http://oa6v84q1e.bkt.clouddn.com/3Environments.png" alt="projectchange"><br>　　<br>　　现在我们不仅是处理项目环境的一份拷贝，而是一系列这样的拷贝。这就代表大量的挑战。<br>　　诚然，我们在解决代码方面已经做得很好：<br>　　　1) 当下版本控制每天都有更好的工具<br>　　　2) 可再生的构建和连续不断的集成<br>　　　3) 可以很好地规范发布和部署过程<br> 　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/4SoftGreen.png" alt="softgreen"><br>  　　　　但是对于数据库而言呢？<br>  　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/5DbRed.png" alt="dbred"><br>　　不幸的是到目前为止我们在这方面还没做好。很多项目仍然依赖于人工的应用Sql脚本。而且有的时候还不如这个。这导致许多问题的诞生：<br>　　1) 在这个机器上的数据库的状态是什么？<br>　　2) 某个脚本是已经被应用了还是没有被应用？<br>　　3) 对产品的快速修复已经在后来的测试中被应用？<br>　　4) 如何新建一个新的数据库实例？<br>　　对这些问题更多的答案是：<strong>我们不知道</strong>　　<br>　　<strong>数据库迁移</strong>是一个很棒的方式来重新获得对这些麻烦的操作的控制，它允许你：从抓取中重建数据库，在任何时候让数据的状态变得很清晰，以一种明确的方式将当前版本的数据库变更至新的版本</p>
+        <h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><blockquote>
+<p>　　Ensure a class has only instance, and provide a global point of access to it.<br>　　确保一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。<br>通过私有的构造函数确保在一个应用中只产生一个实例，并且是自行实例化的。</p>
 </blockquote>
-<h4 id="How-Flyway-works"><a href="#How-Flyway-works" class="headerlink" title="How Flyway works"></a>How Flyway works</h4><blockquote>
-<p><img src="http://oa6v84q1e.bkt.clouddn.com/6EmptyDb.png" alt="emptydb"><br>　　(1) 首先flywaydb会尝试着找出它的元数据表（metadata table），由于数据此时是空的，flyway会改为创建它，默认名为SCHEMA_VERSION，一张简单数据表，它被用来跟踪记录数据库状态。<br>　　<img src="http://oa6v84q1e.bkt.clouddn.com/7EmptySchemaVersion.png" alt="emptySchema"><br>　　(2)之后flyway会开始扫描应用下的文件系统和类路径以实现迁移（migrations）。可以用sql或java方式实现。对所有的迁移(migrations)以他们的版本号排序和应用。这时，schema_version也根据版本顺序更新，初始化步骤完成。<br>   <img src="http://oa6v84q1e.bkt.clouddn.com/8Migration-1-2.png" alt="Migration"><br>　　(3)变更数据库到新版本：flyway再次扫描应用下的文件系统和类路径。将这些各个版本的变更与元数据表对照检查，忽略那些版本号小于或等于被标示为当前版本的变更。筛选剩下的变更就是待定的(pending)变更，它们可用，但还未被应用。<br>　　　　　　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/9PendingMigration.png" alt="PendingMigration"><br>　　(4)之后flyway按照它们的版本号顺序分别执行它们。同时，元数据表schema_version也被更新。<br>　　<img src="http://oa6v84q1e.bkt.clouddn.com/10Migration21.png" alt="Migration"></p>
+<p>饿汉式单例（线程安全）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Singleton()&#123;</div><div class="line">    　private static final Single singleton = new Singleton();</div><div class="line">      private Singleton()&#123; &#125;</div><div class="line">      public static Singleton getInstance()&#123; return singleton;&#125;</div><div class="line">      public static void dosomething()&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>　　这种方式没有使用同步，并且确保了调用static getInstance()方法时才创建Singleton的引用（static 的成员变量在一个类中只有一份）。饿汉式的实现方式虽然貌似开销比较大，但是不会出现线程安全的问题，也是解决线程安全的单例实现的有效方式。</p>
 </blockquote>
-<h4 id="flyway中的约定"><a href="#flyway中的约定" class="headerlink" title="flyway中的约定"></a>flyway中的约定</h4><blockquote>
-<p>图11<br>　　每次需要升级数据库，无论是数据库结构(DDL)还是更新数据(DML)，只需创建一个新的变更(migration)，满足它的版本号大于当前数据库版本号即可，下一次flyway运行，他将会找到新的变更，并按照此更新数据库。<br>Flyway 默认规约<br>　　SQL 脚本文件默认位置是项目的源文件夹下的db/migration  目录。<br>　　Java 代码默认位于db.migration 包。<br>　　SQL 脚本文件及Java 代码类名必须遵循以下命名规则：V<version>[<seq>][description] 。版本号的数字间以小数点(.)或下划线（_ )分隔开，版本号与描述间以连续的两个下划线（<strong> ）分隔开。如V1_1_0</strong>Update.sql 。Java 类名规约不允许存在小数点，所以Java 类名中版本号的数字间只能以下划线进行分隔。</seq></version></p>
+<p> 懒汉式单例（线程安全）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;   </div><div class="line">    private static Singleton instance=null;   </div><div class="line">    private Singleton()&#123;&#125;   </div><div class="line">    public static synchronized Singleton getInstance()&#123;   </div><div class="line">        if(instance==null)&#123;   </div><div class="line">            instance=new Singleton();   </div><div class="line">        &#125;   </div><div class="line">        return instance;   </div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>　　但很多时候我们通常会认为锁定整个方法的是比较耗费资源的，称为重量级锁，代码中实际会产生多线程访问问题的只有 instance = new Singleton．</p>
 </blockquote>
-<h4 id="Java-API-实现-核心测试类"><a href="#Java-API-实现-核心测试类" class="headerlink" title="Java API 实现-核心测试类"></a>Java API 实现-核心测试类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFlyway</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span></div><div class="line">    &#123;   </div><div class="line">    	<span class="comment">//Logger logger = LoggerFactory.getLogger(MyFlyway.class);</span></div><div class="line">    	Flyway flyway = <span class="keyword">new</span> Flyway();</div><div class="line">    	flyway.setDataSource(<span class="string">"jdbc:mysql://localhost:3306/flywaytest"</span>,<span class="string">"root"</span>,<span class="string">"yourpassword"</span>);</div><div class="line">    	flyway.setLocations(<span class="string">"filesystem:db/migration"</span>);</div><div class="line">    	flyway.migrate();</div><div class="line">    	<span class="comment">//logger.info();</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="与spring整合-在项目启动时进行一次migration"><a href="#与spring整合-在项目启动时进行一次migration" class="headerlink" title="与spring整合 在项目启动时进行一次migration"></a>与spring整合 在项目启动时进行一次migration</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--引入数据源配置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"classpath:xx-db.xml"</span>&gt;</span> </div><div class="line"><span class="comment">&lt;!-- 注入bean--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"flyway"</span> <span class="attr">class</span>=<span class="string">"org.flywaydb.core.Flyway"</span> <span class="attr">init-method</span>=<span class="string">"migrate"</span> <span class="attr">lazy-init</span>=<span class="string">"false"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"baselineOnMigrate"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">   <span class="comment">&lt;!--web项目不建议使用filesystem&lt;property name="locations" value="filesystem:migration"/&gt;--&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"locations"</span> <span class="attr">value</span>=<span class="string">"classpath:db/migration"</span>/&gt;</span></div><div class="line">   <span class="comment">&lt;!--引入xx-db.xml中配置的数据源，可以是普通数据源 也可是连接池 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"datasource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>二次检查的单例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public static Singleton getInstance()&#123;     </div><div class="line">    if(instance == null)&#123;     </div><div class="line">        synchronize&#123;     </div><div class="line">           if(instance == null)&#123;     </div><div class="line">              instance =  new Singleton();      </div><div class="line">           &#125;     </div><div class="line">        &#125;     </div><div class="line">    &#125;     </div><div class="line">    return instance;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>　　“双重检查锁定背后的理论是完美的。不幸地是，现实完全不同。双重检查锁定的问题是：并不能保证它会在单处理器或多处理器计算机上顺利运行。双重检查锁定失败的问题并不归咎于 JVM 中的实现 bug，而是归咎于 Java 平台内存模型。内存模型允许所谓的“无序写入”，这也是这些习语失败的一个主要原因。”<br>　　<strong>优点</strong><br>　　对于一个对象需要频繁地创建、销毁，而无法优化这些操作的性能的时候，使用单例模式优势明显。<br>　　减少系统的性能开销，产生一个对象需要比较多的资源和开销时，在应用启动时直接产生一个单例对象，然后用永久驻留内存的方式来解决。<br>　　避免对资源的多重使用，也可在系统设置全局的访问点，例如设计一个单例类负责所有数据表的映射处理。<br>　　Spring中Bean默认就是单例的，这样使得spring容器可以管理这些Bean的生命周期。</p>
+<h4 id="工场方法模式"><a href="#工场方法模式" class="headerlink" title="工场方法模式"></a>工场方法模式</h4><p>　　工厂方法模式使用频率非常高，其定义为:<br>　　Define an interface for creating an object, but let subclasses decide which class to instaniate. Factory Method lets a class defer instantiation to subclasses.定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。<br>　　具有良好的封装性，代码结构清晰。扩展性好，在增加产品类的情况下，只需修改具体工厂类或扩展一个工厂类即可。<br>屏蔽产品类。产品类如何变化，调用者并不关心，它只是依赖于产品的接口，只要接口不变，系统中的上层模块就不要变化。<br>工厂方法模式是new一个对象的替代品，应慎重考虑是否要增加一个工厂类进行管理，增加代码的负责度。</p>
+</blockquote>
+<h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><blockquote>
+<p>　　Provide an interface for creating families of related or dependent objects without specifying their concrete classes.<br>　　为创建一组相关或相互依赖的对象提供一个接口，而无须指定它们的具体类。抽象工厂模式是工厂方法模式的升级版本，在有多个业务品种、业务分类时，通过抽象工厂模式产生需要的对象是一种非常好的解决方式。<br>　　使用场景：一个对象族（或是一组没有任何关系的对象）都有相同的约束。<br>　　如一个应用，需要在三个不同平台运行，通过抽象工厂模式屏蔽掉操作系统对应用的影响，三个不同操作系统上的软件功能、应用逻辑、UI都应该非常类似，唯一不同的是调用不同的工厂方法，由不同的产品类去处理与操作系统交互的信息。</p>
+</blockquote>
+<h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><blockquote>
+<p>　　Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure.<br> 　　定义一个操作中的算法的框架，而将一些步骤延迟到子类中。使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。<br>　　我们知道一个算法所需的关键步骤，并确定了这些步骤的执行顺序。但是某些步骤的具体实现是未知的，或者说某些步骤的实现与具体的环境相关。<br>　　例子1：银行业务办理流程。在银行办理业务时，一般都包含几个基本固定步骤:<br>　　取号排队-&gt;办理具体业务-&gt;对银行工作人员进行评分。<br>　　取号取号排队和对银行工作人员进行评分业务逻辑是一样的。但是办理具体业务是个不相同的，具体业务可能取款、存款或者转账。<br>　　<img src="http://oa6v84q1e.bkt.clouddn.com/ks-designPattern-TemplateMethod.jpg" alt="TemplateMethod"><br>　　抽象类（AbstractClass）: 定义抽象的原语操作（primitive operation） ，具体的子类将重定义它们以实现一个算法， 实现一个模板方法,定义一个算法的骨架。该模板方法不仅调用原语操作，也调用定义<br>　　具体子类 （ConcreteClass）:实现原语操作以完成算法中与特定子类相关的步骤。<br>　　模板方法模式封装不变的部分，扩展可变部分。<br>　　提取公共部分代码，便于维护。<br>　　行为由父类控制，子类实现。<br>　　模板方法模式与控制反转（好莱坞原则）在模板方法模式中，子类不显式调用父类的方法，而是通过覆盖父类的方法来实现某些具体的业务逻辑，父类控制对子类的调用，这种机制被称为好莱坞原则(Hollywood Principle)，好莱坞原则的定义为：“不要给我们打电话，我们会给你打电话(Don’t call us, we’ll call you)”。在好莱坞，把简历递交给演艺公司后就只有回家等待。由演艺公司对整个娱乐项的完全控制，演员只能被动式的接受公司的差使,在需要的环节中，完成自己的演出。模板方法模式充分的体现了“好莱坞”原则。由父类完全控制着子类的逻辑，子类不需要调用父类，而通过父类来调用子类，子类可以实现父类的可变部份，却继承父类的逻辑,不能改变业务逻辑。</p>
+</blockquote>
+<h4 id="策略模式-Strategy-Pattern"><a href="#策略模式-Strategy-Pattern" class="headerlink" title="策略模式(Strategy Pattern)"></a>策略模式(Strategy Pattern)</h4><blockquote>
+<p>　　比较简单的模式，也叫政策模式，但是需要实践。Define a family of algorithms,encapsulate each one, and make them interchangeable.定义一组算法，将每个算法都封装起来，并且是它们之间可以互换。</p>
+</blockquote>
 
       
     </div>
@@ -372,9 +379,7 @@ Why database migrations?
       
         <div class="post-tags">
           
-            <a href="/tags/Database/" rel="tag">#Database</a>
-          
-            <a href="/tags/flyway/" rel="tag">#flyway</a>
+            <a href="/tags/DesignPattern/" rel="tag">#DesignPattern</a>
           
         </div>
       
@@ -383,16 +388,16 @@ Why database migrations?
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/11/ps-football-EuropeanCup/" rel="next" title="欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷”">
-                <i class="fa fa-chevron-left"></i> 欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷”
+              <a href="/2016/06/15/ks-computeNetwork-TCP/" rel="next" title="计算机网络问题">
+                <i class="fa fa-chevron-left"></i> 计算机网络问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/30/fs-framework-springMVC/" rel="prev" title="谈谈Spring MVC的使用心得">
-                谈谈Spring MVC的使用心得 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/18/ks-OperatingSystem-impConcept/" rel="prev" title="操作系统中的一些概念">
+                操作系统中的一些概念 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -419,8 +424,8 @@ Why database migrations?
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/29/ts-database-Flydb/"
-           data-title="一个比较“酷”的数据库版本控制工具-flyway" data-url="http://yoursite.com/2016/08/29/ts-database-Flydb/">
+      <div class="ds-thread" data-thread-key="2016/06/15/ks-DesignPattern-1/"
+           data-title="我理解的设计模式，好像有点缺乏实践" data-url="http://yoursite.com/2016/06/15/ks-DesignPattern-1/">
       </div>
     
   </div>
@@ -511,7 +516,7 @@ Why database migrations?
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-database-migrations"><span class="nav-number">1.</span> <span class="nav-text">Why database migrations?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-Flyway-works"><span class="nav-number">2.</span> <span class="nav-text">How Flyway works</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flyway中的约定"><span class="nav-number">3.</span> <span class="nav-text">flyway中的约定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-API-实现-核心测试类"><span class="nav-number">4.</span> <span class="nav-text">Java API 实现-核心测试类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与spring整合-在项目启动时进行一次migration"><span class="nav-number">5.</span> <span class="nav-text">与spring整合 在项目启动时进行一次migration</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工场方法模式"><span class="nav-number">2.</span> <span class="nav-text">工场方法模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象工厂模式"><span class="nav-number">3.</span> <span class="nav-text">抽象工厂模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板方法模式"><span class="nav-number">4.</span> <span class="nav-text">模板方法模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#策略模式-Strategy-Pattern"><span class="nav-number">5.</span> <span class="nav-text">策略模式(Strategy Pattern)</span></a></li></ol></div>
             
           </div>
         </section>
