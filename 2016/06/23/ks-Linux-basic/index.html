@@ -1,0 +1,792 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="对玩linux的小体会
+　　在此，班门弄斧了，个人不是linux大神，但是坚信玩“溜”linux，真的很酷！对于新手，个人感觉先玩几天虚拟机相对来说，挫败感不会很强，因为如果系统崩了，很容易恢复到以前的状态,而且不会关注很多不必要的东西，曾经装ubantu输入法让我特别恶心。可以按自己的需求使用VMware的快照，以便将系统恢复到自己期望的状态。对于纯linux环境，推荐CentOS，功能全面的发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux入门必会">
+<meta property="og:url" content="http://yoursite.com/2016/06/23/ks-Linux-basic/index.html">
+<meta property="og:site_name" content="cooldsk's Blogs">
+<meta property="og:description" content="对玩linux的小体会
+　　在此，班门弄斧了，个人不是linux大神，但是坚信玩“溜”linux，真的很酷！对于新手，个人感觉先玩几天虚拟机相对来说，挫败感不会很强，因为如果系统崩了，很容易恢复到以前的状态,而且不会关注很多不必要的东西，曾经装ubantu输入法让我特别恶心。可以按自己的需求使用VMware的快照，以便将系统恢复到自己期望的状态。对于纯linux环境，推荐CentOS，功能全面的发">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-10-WildcardCharacter.jpg">
+<meta property="og:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-11-bashOtherSymbol.jpg">
+<meta property="og:updated_time" content="2016-10-01T12:16:56.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux入门必会">
+<meta name="twitter:description" content="对玩linux的小体会
+　　在此，班门弄斧了，个人不是linux大神，但是坚信玩“溜”linux，真的很酷！对于新手，个人感觉先玩几天虚拟机相对来说，挫败感不会很强，因为如果系统崩了，很容易恢复到以前的状态,而且不会关注很多不必要的东西，曾经装ubantu输入法让我特别恶心。可以按自己的需求使用VMware的快照，以便将系统恢复到自己期望的状态。对于纯linux环境，推荐CentOS，功能全面的发">
+<meta name="twitter:image" content="http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-10-WildcardCharacter.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/23/ks-Linux-basic/"/>
+
+  <title> Linux入门必会 | cooldsk's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">cooldsk's Blogs</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">stay hungry, stay foolish</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux入门必会
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-23T18:31:39+08:00" content="2016-06-23">
+              2016-06-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/23/ks-Linux-basic/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/ks-Linux-basic/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/23/ks-Linux-basic/" class="leancloud_visitors" data-flag-title="Linux入门必会">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="对玩linux的小体会"><a href="#对玩linux的小体会" class="headerlink" title="对玩linux的小体会"></a>对玩linux的小体会</h4><blockquote>
+<p>　　在此，班门弄斧了，个人不是linux大神，但是坚信玩“溜”linux，真的很酷！<br>对于新手，个人感觉先玩几天虚拟机相对来说，挫败感不会很强，因为如果系统崩了，很容易恢复到以前的状态,而且不会关注很多不必要的东西，曾经装ubantu输入法让我特别恶心。可以按自己的需求使用VMware的快照，以便将系统恢复到自己期望的状态。对于纯linux环境，推荐CentOS，功能全面的发行版，而ubantu也不错，只是增加了图形化界面，相应增加了系统开销。</p>
+<h4 id="使用Xshell的第一个坑"><a href="#使用Xshell的第一个坑" class="headerlink" title="使用Xshell的第一个坑"></a>使用Xshell的第一个坑</h4><p>　　若用虚拟机，最好还是选择一个了解终端，可以选Xshell，比较简单，这里有个坑。<br>　　　Xshell链接CentOS, 若ifconfig看不到eth0信息:<br>　　　　　执行　vi /etc/sysconfig/network-scripts/ifcfg-eth0<br>　　　　　编辑下里边的BOOT，改为yes后 :wq退出（这是让开机自动eth0）<br>　　　　　然后service network restart<br>　　　　　重启网络服务，然后再ifconfig看看有没有eth0</p>
+<h4 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h4><p>　　Linux使用命令达三千多个、常用200个、突击使用六七十个。常用命名必须记住。<br>　　[root@localhost ~]#<br>　　　　root代表当前登录用户名（管理员账户）非administrator(windows)<br>　　　　localhost当前计算机主机名，windows在局域网内主机名不能相同<br>　　　　~ 波浪号代表当前所在目录 此处~为简化符号 代表家 初始根目录 　　　　管理员家为/root 普通用户家为/home/usr<br>　　<strong><em>命令[选项][格式]</em></strong><br>　　注：个别命令使用不遵循此格式<br>　　当有多个选项时，选项用于调整命令功能，可以写在一起如 ls – ah<br>　　简化选项与完整选项 –a等于—all</p>
+<h4 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h4><p><em>查询目录中内容</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ls(list directory contents)</div><div class="line">目录也是文件，目录文件</div><div class="line">　　选项：</div><div class="line">　　-a 显示所有文件，包括隐藏文件（linux为 “. ”开头文件，表示系统文件，    非必要不要轻易修改）</div><div class="line">　　-l 显示详细内容 ls –l 别名ll</div><div class="line">　　如：-rw-r--r--. 1 root root  7690 5月  26 17:43 install.log.syslog</div><div class="line">　　　　-文件类型(-文件 d 目录 l软链接文件) 共有7种 块设备文件、字符设备文     件、套接字文件、管道文件</div><div class="line">　　　　rw-　　　　　r--　　　　　r--</div><div class="line">　　　　u所有者      g所属组     o其他人</div><div class="line">　　　　文件权限每三个一组，r读，w写，x执行</div><div class="line">　　　　“.”代表”ACL”权限，1表示引用计数 代表这个文件被调用几次，第一个root     表示所有者 第二个root表示所属组 7690表示文件大小 日期表示最后更新日期</div><div class="line">　　-d查看目录属性</div><div class="line">　　-h人性化显示文件大小</div><div class="line">　　-i显示inode</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><em>建立目录</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir –p [目录名]</div><div class="line">　-p递归创建</div><div class="line">Make directories</div><div class="line">mkdir –p japan/cangls 创建一串目录必须加-p</div></pre></td></tr></table></figure></p>
+<p><em>切换目录</em>　<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">cd change directory**</div><div class="line">　　cd ~ 回到家目录</div><div class="line">　　cd </div><div class="line">　　cd – 进入上次所在目录</div><div class="line">    cd .. 进入当前目录上一级目录</div><div class="line">    相对路径：参考当前所在目录，进行查找 如[root@localhost ~]# cd ../usr/local/src/ 查找当前目录上一级目录下usr/local/src 目录</div><div class="line">    绝对路径：从根目录开始指定，一级一级递归查找，在任何目录下都能进入指定位置。</div><div class="line">    pwd</div><div class="line">      print working directory查询所在目录位置。</div><div class="line">   删除空目录: rmdir</div><div class="line">   rmdir [目录名]</div><div class="line">     remove empty directories 只能删除空目录，用得极少</div><div class="line">   rm –rf [文件或目录] remove</div><div class="line">   -r 删目录</div><div class="line">  /tmp/ *</div><div class="line">  加*表示删除tmp下目录和文件 不加表示删除tmp</div><div class="line">若为-rf  false强制删除，不必询问，不能恢复 rm –rf / 自杀，标志root是真正意义上root</div><div class="line">    复制命令:cp</div><div class="line">cp [选项] [原文件或目录][目标目录或新文件名] </div><div class="line">原英文:copy</div><div class="line">选项: -r 复制目录</div><div class="line">     -p 连带文件属性复制</div><div class="line">     -d </div><div class="line">     -a 相当于-pdr</div><div class="line"> 若复制文件且只给出目标目录 则文件名为原文件名</div><div class="line">复制后文件的时间属性可能变为当前复制时间 而不是最后修改时间，若要保证相同使用-a</div><div class="line">剪切或改名命令:mv   </div><div class="line"> move</div><div class="line">操作目录或文件都一样 不加-r</div><div class="line">若源文件和目标文件在同一个目录下则为改名，不在同一目录则为剪切</div></pre></td></tr></table></figure></p>
+<h4 id="常见目录的作用"><a href="#常见目录的作用" class="headerlink" title="常见目录的作用"></a>常见目录的作用</h4><blockquote>
+<p>　　bin  boot  cgroup  dev  etc  home  japan  lib  lost+found  media  misc  mnt  net  opt  proc  root  sbin  selinux  srv  sys  tmp  usr  var<br>　　/ 根目录<br>　　/bin命令保存目录(普通用户就可以读取的命令)<br> 　　根目录下的bin和sbin，usr目录下的bin和sbin，这四个目录都是用来保存系统命令的。sbin下命令只有root才能执行<br>　　/boot启动目录，启动相关文件<br>　　/dev 特殊文件保存目录（硬件文件）<br>　　/etc 保存系统默认配置文件，在学习一些服务时会用到<br>　　/home 普通用户家目录 /root超级用户家目录<br>　　/lib linux中函数库保存目录，将某些功能封装成函数库，在需要的时候才调用<br>　　/media /mnt /misc三个空目录，所有的存储设备都要挂载后使用，挂载可以当做分配盘符，只要是空目录就行，用这三个空目录来最为外接设备盘符，misc用来挂外接磁带机，media用来挂光盘，mnt挂载u盘或移动硬盘<br>　　/proc sys目录不能直接操作，这两个目录保存的是内存的挂载点。这两个目录中的数据是直接写在内存中的。<br>　　/tmp临时目录，存放临时数据<br>　　/usr系统软件资源目录<br>　　/usr/bin/系统命令(普通用户)<br>　　/usr/sbin/系统命令（root用户）<br>　　/var保存系统可变文档目录<br>　　可以在家目录root或home,以及tmp目录下随便放内容，做练习，不推荐在根下做练习</p>
+</blockquote>
+<p><em>链接命令:</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ln –s [原文件][目标文件]</div><div class="line">   link</div><div class="line">   -s 创建软链接</div><div class="line">硬链接特征:</div><div class="line">      拥有相同的i节点和存储block块，可以看做是同一文件。只是名字不同。一个    文件不同的接入点，同样存储空间。</div><div class="line">   可通过i节点识别	两个文件i节点相同</div><div class="line">   不能跨分区创建</div><div class="line">   不能针对目录使用</div><div class="line">例:</div><div class="line">   # ln /root/anaconda-ks.cfg  /tmp/ana.hard</div><div class="line">   -rw-------. 2 root root  1208 5月  26 17:44 anaconda-ks.cfg</div><div class="line">   -rw-------. 2 root root 1208 5月  26 17:44 ana.hard</div><div class="line">   仅是引用次数+1</div><div class="line">   若修改一个文件 访问另一个文件也可以看到变化</div><div class="line">   不建议使用硬链接文件，太过隐蔽，只有通过i节点识别，而且限制太多。</div><div class="line">   创建链接类似于创建windows的快捷方式</div><div class="line">   </div><div class="line">软链接特征：</div><div class="line">   软链接拥有自己的I节点和Block块，但是数据块中只是保存原文件的文件名和I节点号，并没有实际的数据。改任何一个原文件都变化，删软链接文件对原文件没有影响，删原文件，软链接不能使用。</div><div class="line">   软链接文件属性 lrwxrwxrwx 通过原文件限制权限</div><div class="line">   若软链接文件和原文件不在同一目录下，创建时原文件必须用绝对路径表示。</div></pre></td></tr></table></figure></p>
+<h4 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h4><p><em>文件搜索命令locate</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">locate文件名</div><div class="line">    在后台数据库中按文件名搜索，搜素速度更快，功能单一，只可以按照文件名搜索</div><div class="line">    并不是在系统中搜索，而在/var/lib/mlocate数据库中查找，但这个数据库不是实时更新，一天更新一次。</div><div class="line">    可以使用updatedb强制更新</div><div class="line">    Locat按照/etc/updatebd.conf搜索数据库 PRUNE_BIND_MOUTS = “yes”表示指定规则都生效。</div></pre></td></tr></table></figure></p>
+<p><em>命令搜索命令whereis which</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">whereis 命令名（只能是系统命令）</div><div class="line">   搜索命令所在路径及帮助文档所在位置</div><div class="line">   选项: -b 只查找可执行文件</div><div class="line">         -m:只查找帮助文件</div><div class="line">which 命令名 </div><div class="line">   如果命令有别名，可以查看到别名alias ls=&apos;ls--color=auto&apos;增加功能能够显示颜色，当然不是所有命令都有别名。</div><div class="line">   并非所有命令都能找到，比如cd为shell（linux与用户交互所必须的东西）内置命令。通过where和which只能找到外部安装命令。</div><div class="line">   PATH环境变量：定义的是系统搜索命令的路径。</div><div class="line">   执行命令会自动查找PATH(/usr/lib/qt3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)定义的路径是否包含该命令，故系统命令可以不用绝对路径，若自定义命令，要么加绝对路径，要么将命令放在PATH定义的路径下。</div></pre></td></tr></table></figure></p>
+<p><em>文件搜索命令find</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">功能最强大</div><div class="line">find [搜索范围] [搜索条件]</div><div class="line">    如:find / -name install.log</div><div class="line">    避免大范围搜索，会非常耗费系统资源</div><div class="line">    Find是在系统当中搜索符合条件的文件名，如果需要匹配，使用通配符匹配，通配符是完全匹配。</div><div class="line">    *匹配任意内容 find / -name “install*.log”</div><div class="line">    ？匹配任意一个字符   </div><div class="line">    []匹配任意一个中括号内的字符 find /root -name &quot;ab[cd]&quot;</div><div class="line">    find /root –iname isntall.log  -iname不区分文件大小写搜索</div><div class="line">    find /root –user root 按所有者搜索，更常用的是find /root –nouser 查找垃圾文件，sys proc中产生没有所有者文件可能由内核产生，外来数据可能没有所有者。</div><div class="line">    find 范围 –mtime +10 </div><div class="line">      按修改时间查找  find /var/log/ -mtime +10 10天前修改文件，比如只需   要保存10天内日志，-10表示10天内修改文件，10天当天修改的文件，+10表示10天前修改的文件，也可按分钟搜索，atime文件访问时间，ctime改变文件属性，mtime修改文件内容。</div><div class="line">    find . –size 25k</div><div class="line">      按文件大小搜索，.表示当前目录，-25k小于25KB的文件，25k等于25KB的文件，+25KB的文件，KB用”k”，MB用”M”，linux严格区分大小写。默认为数据块（非分区时4k数据块）即扇区，默认512字节。Find / -size 25 为搜索25x512字节大小文件。</div><div class="line">    find . –inum 262422 </div><div class="line">      按i节点号查找文件，“.”仍表示当前目录</div><div class="line">    复杂命令 find /etc –size +20k –a –size -50 k</div><div class="line">      表示查找/etc/目录下大于20KB并且小于50KB的文件，-a and 逻辑与  -o or 逻辑或</div><div class="line">    find /etc –size +20k –a –size -50k –exec ls –lh&#123;&#125;\;</div><div class="line">      表示查找/etc/目录下大于20KB并且小于50KB的文件，并显示详细信息。</div><div class="line">-exec 命令 &#123;&#125; \;对搜索结果执行操作。\;之间没有空格&#123;&#125;与命令和\之间都有空格。命令一定是能处理第一个命令搜索结果的命令</div><div class="line">    find /root –inum 262421 –exec rm –rf &#123;&#125; \;</div><div class="line">      删除inum 为262421的文件。</div><div class="line">Find功能强大，相应的选项就会很多。</div></pre></td></tr></table></figure></p>
+<p><em>搜索字符串命令grep</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">grep [选项]字符串 文件名</div><div class="line">  在文件当中匹配符合条件的字符串</div><div class="line">  选项-i 忽略大小写</div><div class="line">     -v排除指定字符串</div><div class="line">  # grep &quot;size&quot; anaconda-ks.cfg</div><div class="line">  # grep –v &quot;size&quot; anaconda-ks.cfg 搜索不包含size的字符串</div><div class="line">  find 在系统中搜索符合条件的文件名，如果需要匹配，使用通配符匹配，通配符是完全匹配；grep 在文件当中搜索符合条件的字符串，如果需要匹配，用正则表达式匹配，正则表达式为包含匹配，只要匹配就会列出整行。</div><div class="line">  搜索文件名，用通配符匹配，表示完全匹配；搜索文件中字符串，用正则表示匹配，表示包含匹配。</div></pre></td></tr></table></figure></p>
+<h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h4><p><em>man(manual) 命令</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">获取指定命令的帮助，man ls 查看ls的帮助,默认打开最小等级帮助。</div><div class="line">man –f 查看命令拥有那个级别的帮助，相当于whatis 命令，顺带告诉命令作用，也可以用whereis 知道其具有的帮助等级后就可以用 man –等级 命令查看具体等级对应帮助。</div><div class="line">1 表示查看命令的帮助</div><div class="line">5 表示配置文件的帮助</div><div class="line">8 查看系统管理员可用命令的帮助</div><div class="line">如:</div><div class="line">  [root@localhost man]# whereis passwd</div><div class="line">     passwd:/usr/bin/passwd </div><div class="line">     /etc/passwd </div><div class="line">     /usr/share/man/man5/passwd.5.gz</div><div class="line">     /usr/share/man/man1/passwd.1.gz</div><div class="line">     可以看到passwd既是用户命令，也是配置文件</div><div class="line">  man -5 passwd </div><div class="line">     可以查看passwd这个文件的帮助，即解释passwd配置文件中内容的格式和含义</div><div class="line">  其他常用的等级 man -4 null </div><div class="line">  man -8 ifconfig</div><div class="line">  null代表linux的黑洞，如果把数据写入，数据就会丢失，在/dev/null下</div><div class="line">  apropos 命令 可以查看所有包含关键字的帮助文档，如apropos passwd显示所有包含passwd关键字的帮助文档。</div></pre></td></tr></table></figure></p>
+<p><em>其他帮助命令</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">命令 --help</div><div class="line">    如ls --help</div><div class="line">    shell内部命令帮助,shell 是linux命令显示器的作用，用户和Linux交互，用户与内核交互的接口。</div><div class="line">    获取shell 内部命令的帮助</div><div class="line">        whereis 命令 判断命令是否为shell内部命令</div><div class="line">        如：whereis cd 确定是否是shell内部命令，没有命令位置则为内部命令，不能用man获取内部命令获取帮助</div><div class="line">        help 内部命令 以获取内部命令帮助</div><div class="line">        如 help cd </div><div class="line">详细命令帮助info</div><div class="line">      info 命令 它系统中把所有命令封装到一个巨大的文档</div><div class="line">        按-回车 进入子帮助页面</div><div class="line">        按-u:进入上层页面</div><div class="line">        按-n 进入下一个帮助小节</div><div class="line">        按-p进入上一个帮助小节</div><div class="line">        按-q 退出</div></pre></td></tr></table></figure></p>
+<h4 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">   常用压缩格式: .zip .gz .bz2 .tar.gz .tar.bz2 按格式记忆，linu下最常见格式还是.tar.gz 和.tar.bz2</div><div class="line">.zip格式压缩</div><div class="line">     zip  压缩文件名 源文件 压缩文件</div><div class="line">     zip  -r 压缩文件名 源目录  源目录</div><div class="line">    .zip文件格式和windows文件通用</div><div class="line">     写扩展名为了更方便区分文件类型</div><div class="line">     unzip 解压缩</div><div class="line">.gz格式压缩 </div><div class="line">   .gz格式虽然是linux专有格式，但windows下也能实现解压缩.gz</div><div class="line">   gzip 源文件  </div><div class="line">       压缩为.gz格式的压缩文件，源文件会消失</div><div class="line">   gzip -c 源文件 &gt; 压缩文件  </div><div class="line">       源文件保留，gzip本身不能保存源文件，而用输入重定向方式&gt;（把命令结果写入指定文件）</div><div class="line">   gzip -r 目录</div><div class="line">      压缩目录下所有的子文件，但是不能压缩目录，这个命令用起来很不方便</div><div class="line">解压缩命令  解压缩后源文件扔消失</div><div class="line">   gzip -d 压缩包名</div><div class="line">   gunzip  压缩包名</div><div class="line">     -r表示解压缩目录，目录没有变化，目录下文件解压</div><div class="line">.bz2格式压缩</div><div class="line">   bzip2 源文件</div><div class="line">      压缩为.bz2格式，不保留源文件</div><div class="line">   bzip2 -k 源文件</div><div class="line">      压缩之后保留源文件</div><div class="line">      注意bzip2命令不能压缩目录</div><div class="line">   bizp2 -d 压缩文件</div><div class="line">   bunzip 压缩文件</div><div class="line">#解压缩，-k保留压缩文件</div><div class="line">   .tar.gz 与.tar.bz2  先打包再压缩</div><div class="line">打包命令tar</div><div class="line">    tar -cvf 打包文件名 源文件</div><div class="line">       选项-c: 打包</div><div class="line">           -v:显示过程</div><div class="line">           -f:指定打包后的文件名</div><div class="line">        如tar -cvf longzls.tar longzls</div><div class="line">    解打包命令</div><div class="line">        tar –xvf 打包文件名</div><div class="line">          选项-x :解打包</div><div class="line">          如tar –xvf longzls.tar</div><div class="line"> .tar.gz压缩格式</div><div class="line">    其实.tar.gz格式是先打包为.tar格式，在压缩为.gz格式</div><div class="line">    tar –zcvf 压缩包名.tar.gz 源文件</div><div class="line">       选项：-zc :压缩为.tat.gz格式</div><div class="line">       例：tar –zcvf /tmp/test.tar.gz  jp  anaconda-ks.cfg</div><div class="line">           打包多个文件到tmp目录（绝对路径）多个文件用空格隔开</div><div class="line">    tar -zxcf 压缩包名.tat.gz</div><div class="line">       选项: -zx 解压缩.tar.gz格式</div><div class="line">             tar -zxcf 压缩包名.tat.gz  -C 目标目录 表示解压到目标目录 </div><div class="line">    tar -jcvf 压缩包名.tar.bz2 源文件</div><div class="line">       选项 -jc 压缩为.tat.bz2格式</div><div class="line">    tar -jxcf 压缩包名.tar.bz2</div><div class="line">       选项 -jx 解压缩.tar.gz格式</div><div class="line">    tar -jxcf 压缩包名.tar.gz  -C 目标目录 表示解压到目标目录</div><div class="line">    tar –ztvf 压缩包名.tat.gz表示只查看压缩包内容</div></pre></td></tr></table></figure>
+<h4 id="关机与重启命令"><a href="#关机与重启命令" class="headerlink" title="关机与重启命令"></a>关机与重启命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">shutdown [选项]时间</div><div class="line">   选项: </div><div class="line">     -c取消前一个关机命令</div><div class="line">     -h关机</div><div class="line">     -r重启</div><div class="line">      远程关机后解决重启问题比较麻烦，而且现实中服务器有很多资源和服务在被访   问，关机会出现很大问题，halt、poeroff、 init 0都不能正确保存服务后关机，   而shutdown相对安全。</div><div class="line">      重启</div><div class="line">      reboot 相对安全</div><div class="line">      init 6</div><div class="line">      系统运行级别 0 关机</div><div class="line">                   1 单用户 相当于windows安全模式，启动最小服务</div><div class="line">                   2 不完全多用户，不含NFS服务(文件共享服务)</div><div class="line">                   3 完全多用户 我们通常使用的模式</div><div class="line">                   4未分配 没有使用</div><div class="line">                   5 图形界面 前提需要图形界面</div><div class="line">                   6重启</div><div class="line">runlevel查看系统运行级别</div><div class="line">N 3 前一个代表上一个级别，3代表当前级别</div><div class="line">/etc/inittab中定义了默认进入级别，一般为id:3:initdefault 不能为0 或6</div></pre></td></tr></table></figure>
+<h4 id="退出登录命令"><a href="#退出登录命令" class="headerlink" title="退出登录命令"></a>退出登录命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">logout</div><div class="line">linux允许同时远程登录用户为256个，最大支持600多个，windows登录能同时登录的就特别少，xp只允许同时远程登录1个，如果直接X掉，其他就再也登不进去了，必须重启服务器，但是服务器绝对不是可以随便重启的，代价昂贵，突然重启用户访问就受限，体验就特差，自然用户就会减少。虽然linux直接退出影响不大（能同时登录用户多），但总也不好，有上限，故需要logout退出。</div></pre></td></tr></table></figure>
+<h4 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">    在Linux中所有的存储设备必须挂载后才能使用，挂载可以理解为Windows中分配盘符，Linux中使用系统目录来作为“盘符”，在Linux中称为挂载点，把挂载点分配给设备的过程称为挂载。安装过程中硬盘、分区都是自动挂载的，如果根分区、boot分区、home分区都是自动挂载的。其他如U盘等设备都需要使用挂载命令挂载才能正常使用。</div><div class="line">    mount</div><div class="line">      查看系统中已经挂载好的设备。</div><div class="line">    mount –a</div><div class="line">      根据配置文件/etc/fstab的内容，自动挂载，/etc/fstab为Linux设置自动挂载的文件，若设备不存在，则系统不能启动。</div><div class="line">    mount [-t 文件系统] [-o特殊设备] 设备文件名 挂载点</div><div class="line">      选项：</div><div class="line">          -t 文件系统：加入文件系统类型来指定挂载的类型，可以是ext3、ex           t4、ios9660（光盘必须使用），CentOS6以后都使用ext4</div><div class="line">          -o特殊选项:可以指定挂载的额外选项，默认挂载为rw读写权限                ，exec/noexec执行/不执行，设定是否允许在文件系统中执行可执行              文件，默认是exec允许。</div><div class="line">    linux脚本</div><div class="line">       纯Linux脚本文件中可以不在开头第一行写#! /bin/bash，但是Linux通常      会嵌入其他语言，所有必须写！</div><div class="line">       ./hello.sh执行脚本或者，或使用绝对路径 /home/hello.sh 只是为了找到    该脚本，./代表当前目录</div><div class="line">    chmod 755 hello.sh赋予执行权限</div><div class="line">    </div><div class="line">挂载光盘</div><div class="line">    只要是空目录都可以作为挂载点</div><div class="line">linux在根目录下指定了三个挂载点media、misc、mnt但以前版本的linux只有mnt，所以大家通常还是讲光盘和U盘建立各自目录后挂载在mnt</div><div class="line">    mkdir /mnt/cdrom/ 创建挂载点</div><div class="line">    mount –t iso9660 /dev/cdrom /mnt/cdrom</div><div class="line">    或 </div><div class="line">    mount –t iso9660 /dev/sr0 /mnt/cdrom</div><div class="line">      /dev/cdrom为sr0软链接文件，挂载光盘必须使用iso9660和sr0</div><div class="line">      所以简化命令mount  /dev/cdrom /mnt/cdrom</div><div class="line"></div><div class="line">卸载光盘</div><div class="line">    必须卸载，卸载命令必须使用，在真实机里不卸载光盘是取不出的，虚拟机下强制卸载会使linux系统崩溃。</div><div class="line">    必须退出挂载点目录，也就是当前目录不能在/mnt/cdrom</div><div class="line">    umount 设备文件名或挂载点</div><div class="line">   </div><div class="line">挂载U盘</div><div class="line">    fdisk -l 查看系统当中已经识别的硬盘</div><div class="line">    如果U盘插入也会显示 一般u盘设备文件名为sdb1，先查看再用命令</div><div class="line">    mount -t vfat /dev/sdb1 /mnt/usb/</div><div class="line">    u盘文件系统是fat32 故指定文件系统为-t vfat</div><div class="line">    卸载命令与卸载光盘类似</div><div class="line"></div><div class="line">       Linux是不支持NTFS文件系统的，Linux将它认为它需要的驱动放在内核中。要支持NTFS，需要重新编译内核或者装入ntfs-3g软件，即使这样，也不能写入数据到NTFS移动硬盘，linux要和Windows交换数据，一般选择网络传输。</div><div class="line">```  </div><div class="line">#### 查看用户信息</div></pre></td></tr></table></figure>
+<p>   w或者who查看系统中登录了哪些用户，即查询系统中出了当前用户外，还有多少其他用户。只是w能看到一些系统资源的使用情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![order-w](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-1-order-w.jpg)</div><div class="line">![orderw](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-1-orderw-detail.jpg)</div></pre></td></tr></table></figure></p>
+<p>   tty1直接登录用户1<br>   pts/0 远程登录用户1<br>     -bash等待输入命令<br>   last命令<br>     查询当前登录和过去登录的用户信息，即判断系统中所有用户登录信息<br>last命令默认是读取/var/log/wtmp文件数据,该文件为二进制文件。必须用last而非vi查看<br>     lastlog查看所有用户的最后一次登录时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#### shell</div><div class="line">&gt; 　　shell 是系统的用户界面，它提供了用户和 Linux （内核）之间进行交互操作的一种接口。用户在命 令行中输入的每个命令都由 shell 先解释，然后传给 Linux 内核去执行。</div><div class="line">　　shell既是一种命令语言，又是一种程序设计语言。作为命令语言，它交互式地解释和执行用户输入的命令；作为程序设计语言，它定义了各种变量和参数，并提供了许多在高级语言中才具有的控制结构，包括循环和分支。可以说，shell使用的熟练程度反映了用户对Unix/Linux使用的熟练程度。</div><div class="line">**Shell有两种执行命令的方式：**</div><div class="line">　　交互式（Interactive）：解释执行用户的命令，用户输入一条命令，Shell就解释执行一条。</div><div class="line">　　批处理（Batch）：用户事先写一个Shell脚本(Script)，其中有很多条命令，让Shell一次把这些命令执行完，而不必一条一条地敲命令。</div><div class="line">　　Shell脚本和编程语言很相似，也有变量和流程控制语句，但Shell脚本是解释执行的，不需要编译，Shell程序从脚本中一行一行读取并执行这些命令，相当于一个用户把脚本中的命令一行一行敲到Shell提示符下执行。</div><div class="line">　　如果把 Linux 内核想象成一个球体的中心，shell 就是围绕内核 的外层，从 shell 向 Linux 操作系 统传递命令时，内核就会做出相 应的反应。</div><div class="line">　　![kernal](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-2-Kernal.jpg)</div><div class="line">　　shell的两种主要语法类型有Bourne和C，这两种语法彼此不兼容。</div><div class="line">　　Bourne家族主要包括sh、ksh、Bash、psh、zsh（Linux）</div><div class="line">　　C家族主要包括csh、tcsh(Unix)</div><div class="line">　　bash是Linux标准默认的shell， bash由Brian Fox和Chet Ramey共同完成，是BourneAgain Shell的缩写，内部命令一共有40个。它基于Bourne shell，吸收了C shell和Korn shell的一些特性。bash完全兼容sh，也就是说，用sh写的脚本可以不加修改的在bash中执行。</div><div class="line">　　sh 由Steve Bourne开发，是Bourne Shell的缩写，sh 是Unix 标准默认的shell。</div><div class="line">　　csh 是Linux比较大的内核，它由以William Joy为代表的共计47位作者编成，共有52个内部命令。该shell其实是指向/bin/tcsh这样的一个shell，也就是说，csh其实就是tcsh。</div><div class="line">　　ksh 是Korn shell的缩写，由Eric Gisin编写，共有42条内部命令。该shell最大的优点是几乎和商业发行版的ksh完全兼容，这样就可以在不用花钱购买商业版本的情况下尝试商业版本的性能了。</div><div class="line">　　Linux使用它作为默认的shell是因为它有诸如以下的特色：</div><div class="line">　　•可以使用类似DOS下面的doskey的功能，用方向键查阅和快速输入并修改命令。</div><div class="line">　　•自动通过查找匹配的方式给出以某字符串开头的命令。</div><div class="line">　　•包含了自身的帮助功能，你只要在提示符下面键入help就可以得到相关的帮助。</div><div class="line">#### echo命令</div></pre></td></tr></table></figure></p>
+<pre><code>echo命令的功能是在显示器上显示一段文字，一般起到一个提示的作用。在shell编程中极为常用, 在终端下打印变量value的时候也是常常用到的
+echo [ -n ] 字符串
+   选项n表示输出文字后不换行；字符串能加引号，也能不加引号。
+   用echo命令输出加引号的字符串时，将字符串原样输出。
+   用echo命令输出不加引号的字符串时，将字符串中的各个单词作为字符    串输出，各字符串之间用一个空格分割。
+   若字符串中有特殊的如\t \a \b \n等转义字符时，按照转义输出。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#### 第一个shell脚本</div><div class="line">&gt;　　打开文本编辑器，新建一个文件，扩展名为sh（sh代表shell），扩展名并不影响脚本执行，见名知意就好，如果你用php写shell 脚本，扩展名就用php好了。hello.sh</div><div class="line">　　#!/bin/bash</div><div class="line">　　echo &quot;天上掉下个林妹妹!&quot;</div><div class="line">　　“#!” 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种Shell。echo命令用于向窗口输出文本。</div><div class="line">　　赋予执行权限，运行</div><div class="line">　　chmod 755 hello.sh</div><div class="line">　　运行 ./hello.sh 或hello.sh的绝对路径。或者通过bash调用执行脚本</div><div class="line">  　bash hello.sh</div><div class="line"></div><div class="line">#### 查看与修改别名</div></pre></td></tr></table></figure>
+<p>alias 查看系统中所有命令的别名<br>alias别名=’原命令 设定别名 重启失效</p>
+<p>vi ~/.bashrc 写入环境变量配置文件 永久生效<br>unalias 别名 删除别名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![takeeffect](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-3-take-effectOrder.jpg)</div></pre></td></tr></table></figure></p>
+<p>除非你确定要覆盖原有命令，否则新建的别名不能和原有的命令重名。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">![shortcutkey](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-4-shortcutkey.jpg)</div><div class="line"> </div><div class="line"></div><div class="line">#### 历史命令</div></pre></td></tr></table></figure></p>
+<p>history [选项][历史命令保存文件]<br>     选项:-c 清空历史命令<br>          -w把缓存中的历史命令写入历史命令保存文件~/.bash_history<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">![historyComm](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-5-historyCommand.jpg)</div><div class="line">![inAndout](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-6-inAndOut.jpg)</div><div class="line">![outputr1](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-7-output-redirection.jpg)</div><div class="line">![outputr2](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-8-output-redirection2.jpg)</div><div class="line">#### 输入重定向</div></pre></td></tr></table></figure></p>
+<p>  wc [选项][文件名]<br>     -c统计字节数<br>     -w统计单词数<br>     -l统计行数<br>   用于软件安装，打补丁<br>   以文件作为输入源，而非键盘<br>   wc &lt;&lt; 字符串 统计两相同该字符串间字符情况，实际中此命令用得很少<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">![manyComm](http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-9-ManyCommandExcute.jpg)</div><div class="line"> </div><div class="line">#### 管道符|</div></pre></td></tr></table></figure></p>
+<p>   命令1|命令2<br>     若命令1正确执行，将命令1的执行结果传递给命令2，要求命令2必须能操作命令1的结果<br>   如 ls –l /etc | more 将命令1的结果分屏显示<br>      netstat –an | grep ESTABLISHED 在命令1的结果中查询包含ESTABLISHED的行，查看多少人连接了服务器。<br>      netstat –an | grep ESTABLISHED |wc –l 直接连接统计个数<br>```<br>　　通配符<br>　　　　通配符用来匹配文件名或目录<br>　　　　<img src="http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-10-WildcardCharacter.jpg" alt="wildcardCharacter"><br>　　Bash中其他特殊符号<br>　　<img src="http://oa6v84q1e.bkt.clouddn.com/ks-linux-basic-11-bashOtherSymbol.jpg" alt="bashSybol"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/ks-DesignPattern-1/" rel="next" title="我理解的设计模式，好像有点缺乏实践">
+                <i class="fa fa-chevron-left"></i> 我理解的设计模式，好像有点缺乏实践
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/11/ps-football-EuropeanCup/" rel="prev" title="欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷”">
+                欧洲杯决赛--其实我不是“球迷”，也就不是“伪球迷” <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/23/ks-Linux-basic/"
+           data-title="Linux入门必会" data-url="http://yoursite.com/2016/06/23/ks-Linux-basic/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar/jin.jpg"
+               alt="上官成睿" />
+          <p class="site-author-name" itemprop="name">上官成睿</p>
+          <p class="site-description motion-element" itemprop="description">真酷~</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对玩linux的小体会"><span class="nav-number">1.</span> <span class="nav-text">对玩linux的小体会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Xshell的第一个坑"><span class="nav-number">2.</span> <span class="nav-text">使用Xshell的第一个坑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令基本格式"><span class="nav-number">3.</span> <span class="nav-text">命令基本格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件处理命令"><span class="nav-number">4.</span> <span class="nav-text">文件处理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见目录的作用"><span class="nav-number">5.</span> <span class="nav-text">常见目录的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件搜索命令"><span class="nav-number">6.</span> <span class="nav-text">文件搜索命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#帮助命令"><span class="nav-number">7.</span> <span class="nav-text">帮助命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩命令"><span class="nav-number">8.</span> <span class="nav-text">压缩命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关机与重启命令"><span class="nav-number">9.</span> <span class="nav-text">关机与重启命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#退出登录命令"><span class="nav-number">10.</span> <span class="nav-text">退出登录命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载命令"><span class="nav-number">11.</span> <span class="nav-text">挂载命令</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">上官成睿</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cooldsk-blogs"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("s9tGKxttewlrHXIhwQa7cGih-gzGzoHsz", "lW0Nup72QVrAqSSqSrrh0EvV");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
